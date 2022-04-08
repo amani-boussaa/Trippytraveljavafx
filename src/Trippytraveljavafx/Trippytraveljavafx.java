@@ -16,7 +16,9 @@ public class Trippytraveljavafx {
 
         try {
             ps.ajouter(p1);
-            ps.ajouterr(p2);
+//            ps.ajouterr(p2);
+             ps.supprimer(14);
+            //  ps.modifer(p1);
             System.out.println(ps.afficher().toString());
 
         } catch (SQLException ex) {
