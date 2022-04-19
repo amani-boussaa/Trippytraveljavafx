@@ -1,5 +1,5 @@
 package Entities;
-
+//**//
 public class Excursion {
     private int id,excursioncategorie_id;
     private String libelle,description,programme,ville,prix,duration,localisation;
