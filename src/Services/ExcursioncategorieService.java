@@ -7,6 +7,8 @@ import Utils.MyDB;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class ExcursioncategorieService implements IService<Excursioncategorie>{
     Connection con;
@@ -42,7 +44,7 @@ public class ExcursioncategorieService implements IService<Excursioncategorie>{
         List<Excursioncategorie> Excursioncategories = new ArrayList<Excursioncategorie>();
         while(rst.next()){
 
-            Excursioncategorie p = new Excursioncategorie(rst.getInt("Excursioncategorie_id"),rst.getString("libelle"));
+            Excursioncategorie p = new Excursioncategorie(rst.getInt("id"),rst.getString("libelle"));
             Excursioncategories.add(p);
 
         }
@@ -72,7 +74,7 @@ public class ExcursioncategorieService implements IService<Excursioncategorie>{
     @Override
     public void modifer(Excursioncategorie p) {
         try {
-            String req1 = "UPDATE `excursion` SET  libelle=? where id= ?;";
+            String req1 = "UPDATE `excursioncategorie` SET  libelle=? where id= ?;";
             PreparedStatement ps = con.prepareStatement(req1);
             ps.setString(1, p.getLibelle());
             ps.setInt(2, p.getId());
@@ -88,5 +90,42 @@ public class ExcursioncategorieService implements IService<Excursioncategorie>{
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+    public ObservableList<Excursioncategorie> getExcursioncategorieList() {
+        ObservableList<Excursioncategorie> Excursioncategories = FXCollections.observableArrayList();
+        String req = "Select * from `excursioncategorie`";
+        try {
+            stm = con.createStatement();
+            ResultSet rst = stm.executeQuery(req);
+            System.out.println(rst.toString());
+            while (rst.next()) {
+
+                Excursioncategorie p = new Excursioncategorie(rst.getInt("id"),rst.getString("libelle"));
+                Excursioncategories.add(p);
+
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Excursioncategories;
+
+    }
+     public ObservableList<String> getExcursioncategorieListLibelle() {
+        ObservableList<String> Excursioncategories = FXCollections.observableArrayList();
+        String req = "Select * from `excursioncategorie`";
+        try {
+            stm = con.createStatement();
+            ResultSet rst = stm.executeQuery(req);
+            System.out.println(rst.toString());
+            while (rst.next()) {
+                Excursioncategories.add(rst.getString("libelle"));
+               
+
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Excursioncategories;
+
     }
 }

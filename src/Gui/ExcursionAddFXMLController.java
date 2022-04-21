@@ -6,15 +6,22 @@
 package Gui;
 
 import Entities.Excursion;
+import Entities.Excursioncategorie;
 import Services.ExcursionService;
+import Services.ExcursioncategorieService;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
@@ -41,7 +48,9 @@ public class ExcursionAddFXMLController implements Initializable {
     private TextField durationFld;
     @FXML
     private TextField localisationFld;
-
+    @FXML
+    private ComboBox<String> catCombo;
+   
 
     /**
      * Initializes the controller class.
@@ -49,6 +58,7 @@ public class ExcursionAddFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        populateCategories();
     }
 
     @FXML
@@ -88,6 +98,12 @@ public class ExcursionAddFXMLController implements Initializable {
             }
         }
 
+    }
+
+    private void populateCategories() {
+        ExcursioncategorieService ps = new ExcursioncategorieService();
+        ObservableList<String> ExcursioncategorieList = ps.getExcursioncategorieListLibelle();
+        catCombo.setItems(ExcursioncategorieList);
     }
 
     
