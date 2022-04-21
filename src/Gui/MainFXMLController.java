@@ -125,7 +125,7 @@ public class MainFXMLController implements Initializable {
             Scene scene = new Scene(parent);
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.setTitle("Ajouter excursion");
+            stage.setTitle("Ajouter un article");
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
