@@ -10,7 +10,8 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class ExcursioncategorieService implements IService<Excursioncategorie>{
+public class ExcursioncategorieService implements IService<Excursioncategorie> {
+
     Connection con;
     Statement stm;
 
@@ -42,9 +43,9 @@ public class ExcursioncategorieService implements IService<Excursioncategorie>{
         ResultSet rst = stm.executeQuery(req);
         System.out.println(rst.toString());
         List<Excursioncategorie> Excursioncategories = new ArrayList<Excursioncategorie>();
-        while(rst.next()){
+        while (rst.next()) {
 
-            Excursioncategorie p = new Excursioncategorie(rst.getInt("id"),rst.getString("libelle"));
+            Excursioncategorie p = new Excursioncategorie(rst.getInt("id"), rst.getString("libelle"));
             Excursioncategories.add(p);
 
         }
@@ -54,19 +55,18 @@ public class ExcursioncategorieService implements IService<Excursioncategorie>{
 
     public void supprimer(int id) {
         try {
-            String req1 ="Delete from excursioncategorie where id=? ;";
+            String req1 = "Delete from excursioncategorie where id=? ;";
             PreparedStatement ps = con.prepareStatement(req1);
 
             ps.setInt(1, id);
             if (ps.executeUpdate() != 0) {
                 System.out.println("excursioncategorie Deleted");
 
-
-            }else
+            } else {
                 System.out.println("id excursioncategorie not found!!!");
+            }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-
 
         }
     }
@@ -85,12 +85,11 @@ public class ExcursioncategorieService implements IService<Excursioncategorie>{
                 System.out.println("non ");
             }
 
-
-
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
+
     public ObservableList<Excursioncategorie> getExcursioncategorieList() {
         ObservableList<Excursioncategorie> Excursioncategories = FXCollections.observableArrayList();
         String req = "Select * from `excursioncategorie`";
@@ -100,7 +99,7 @@ public class ExcursioncategorieService implements IService<Excursioncategorie>{
             System.out.println(rst.toString());
             while (rst.next()) {
 
-                Excursioncategorie p = new Excursioncategorie(rst.getInt("id"),rst.getString("libelle"));
+                Excursioncategorie p = new Excursioncategorie(rst.getInt("id"), rst.getString("libelle"));
                 Excursioncategories.add(p);
 
             }
@@ -110,7 +109,8 @@ public class ExcursioncategorieService implements IService<Excursioncategorie>{
         return Excursioncategories;
 
     }
-     public ObservableList<String> getExcursioncategorieListLibelle() {
+
+    public ObservableList<String> getExcursioncategorieListLibelle() {
         ObservableList<String> Excursioncategories = FXCollections.observableArrayList();
         String req = "Select * from `excursioncategorie`";
         try {
@@ -119,7 +119,6 @@ public class ExcursioncategorieService implements IService<Excursioncategorie>{
             System.out.println(rst.toString());
             while (rst.next()) {
                 Excursioncategories.add(rst.getString("libelle"));
-               
 
             }
         } catch (Exception ex) {
@@ -127,5 +126,31 @@ public class ExcursioncategorieService implements IService<Excursioncategorie>{
         }
         return Excursioncategories;
 
+    }
+
+    public Excursioncategorie getCategorie(String lib) {
+        Excursioncategorie cat = null;
+        String req = "SELECT * FROM `excursioncategorie` WHERE `libelle` = '" + lib + "'";
+        try {
+            stm = con.createStatement();
+            ResultSet rst = stm.executeQuery(req);
+            System.out.println(rst.toString());
+            if (rst.next()) {
+                cat = new Excursioncategorie();
+                cat.setId(rst.getInt("id"));
+                cat.setLibelle(rst.getString("libelle"));
+                
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        /* Excursioncategorie cat = null;
+        if (rs.next()) {
+            cat = new Excursioncategorie();
+            cat.setId(rs.getInt("id"));
+            cat.setLibelle(rs.getString("libelle"));
+        }
+        return cat;*/
+        return cat;
     }
 }

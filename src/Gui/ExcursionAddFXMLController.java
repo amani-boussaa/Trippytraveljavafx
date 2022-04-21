@@ -51,7 +51,7 @@ public class ExcursionAddFXMLController implements Initializable {
     @FXML
     private ComboBox<String> catCombo;
    
-
+    Excursioncategorie excursioncat = null;
     /**
      * Initializes the controller class.
      */
@@ -64,13 +64,14 @@ public class ExcursionAddFXMLController implements Initializable {
     @FXML
     private void insert(MouseEvent event) {
         String lib = libFld.getText();
-        String cattxt = catFld.getText();
+        /*String cattxt = catFld.getText();
         int cat = 1;
         if (cattxt.isEmpty()) {
             cat = 1;
         } else {
             cat = Integer.parseInt(catFld.getText());
-        }
+        }*/
+        String cat = catCombo.getSelectionModel().getSelectedItem().toString();   
         String prix = prixFld.getText();
         String desc = descriptionFld.getText();
         String prog = progFld.getText();
@@ -78,13 +79,16 @@ public class ExcursionAddFXMLController implements Initializable {
         String duration = durationFld.getText();
         String localisation = localisationFld.getText();
 
-        if (lib.isEmpty() || cattxt.isEmpty() || prix.isEmpty() || desc.isEmpty() || prog.isEmpty() || ville.isEmpty() || duration.isEmpty() || localisation.isEmpty()) {
+        if (lib.isEmpty()  || prix.isEmpty() || desc.isEmpty() || prog.isEmpty() || ville.isEmpty() || duration.isEmpty() || localisation.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Remplissez tous les données SVP !");
             alert.showAndWait();
         } else {
-            Excursion p2 = new Excursion(cat, lib, desc, prog, ville, prix, duration, localisation);
+            ExcursioncategorieService cs = new ExcursioncategorieService();
+            excursioncat = cs.getCategorie(cat);
+            System.out.println(excursioncat);
+            Excursion p2 = new Excursion(excursioncat.getId(), lib, desc, prog, ville, prix, duration, localisation);
             ExcursionService ps = new ExcursionService();
             try {
                 ps.ajouterr(p2);
