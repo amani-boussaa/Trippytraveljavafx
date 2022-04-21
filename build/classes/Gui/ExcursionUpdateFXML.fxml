@@ -11,18 +11,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="360.0" prefWidth="486.0" style="-fx-background-color: #222831;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.ExcursionAddFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="360.0" prefWidth="486.0" style="-fx-background-color: #222831;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.ExcursionUpdateFXMLController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="466.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="466.0">
                <children>
-                  <FontAwesomeIconView fill="WHITE" glyphName="PLUS_SQUARE_ALT" size="24" textOrigin="CENTER">
+                  <FontAwesomeIconView fill="WHITE" glyphName="PENCIL_SQUARE_ALT" size="24" textOrigin="CENTER">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
                   </FontAwesomeIconView>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter excursion" textOrigin="CENTER" wrappingWidth="223.5390625">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier excursion" textOrigin="CENTER" wrappingWidth="223.5390625">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -41,22 +41,25 @@
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </HBox.margin>
                   </Text>
-                  <ComboBox fx:id="catCombo" prefHeight="25.0" prefWidth="381.0" />
+                  <ComboBox fx:id="catCombo" prefHeight="25.0" prefWidth="341.0" />
                </children>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
-               <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
-               </VBox.margin>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="600.0">
                <children>
                   <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Libellé" wrappingWidth="103.13671875">
                      <font>
                         <Font name="System Bold" size="14.0" />
-                     </font></Text>
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></Text>
                   <TextField fx:id="libFld" prefHeight="25.0" prefWidth="482.0" />
                </children>
                <opaqueInsets>
@@ -147,9 +150,9 @@
                   <Insets top="5.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="73.0" prefWidth="466.0">
+            <HBox alignment="CENTER" prefHeight="59.0" prefWidth="466.0">
                <children>
-                  <Button alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="10.0" mnemonicParsing="false" onMouseClicked="#insert" prefHeight="37.0" prefWidth="112.0" stylesheets="@../css/stylel.css" text="Ajouter">
+                  <Button alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="10.0" mnemonicParsing="false" onMouseClicked="#update" prefHeight="39.0" prefWidth="141.0" stylesheets="@../css/stylel.css" text="Modifier">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
@@ -160,7 +163,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnClose" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="10.0" layoutX="236.0" layoutY="31.0" mnemonicParsing="false" onMouseClicked="#handleClose" prefHeight="37.0" prefWidth="112.0" styleClass="border-button" stylesheets="@../css/stylel.css" text="Annuler">
+                  <Button fx:id="btnClose" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="10.0" layoutX="236.0" layoutY="31.0" mnemonicParsing="false" onMouseClicked="#handleClose" prefHeight="39.0" prefWidth="133.0" styleClass="border-button" stylesheets="@../css/stylel.css" text="Annuler">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
@@ -172,9 +175,6 @@
                      </font>
                   </Button>
                </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
                <VBox.margin>
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>

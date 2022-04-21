@@ -11,12 +11,9 @@ import Services.ExcursionService;
 import Services.ExcursioncategorieService;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,7 +29,7 @@ import javafx.stage.Stage;
  *
  * @author amani
  */
-public class ExcursionAddFXMLController implements Initializable {
+public class ExcursionUpdateFXMLController implements Initializable {
 
     @FXML
     private TextField libFld;
@@ -48,9 +45,9 @@ public class ExcursionAddFXMLController implements Initializable {
     private TextField durationFld;
     @FXML
     private TextField localisationFld;
+    int studentId;
     @FXML
     private ComboBox<String> catCombo;
-
     Excursioncategorie excursioncat = null;
     @FXML
     private Button btnClose;
@@ -65,7 +62,7 @@ public class ExcursionAddFXMLController implements Initializable {
     }
 
     @FXML
-    private void insert(MouseEvent event) {
+    private void update(MouseEvent event) {
         String lib = libFld.getText();
         String cat = catCombo.getSelectionModel().getSelectedItem().toString();
         String prix = prixFld.getText();
@@ -74,33 +71,34 @@ public class ExcursionAddFXMLController implements Initializable {
         String ville = villeFld.getText();
         String duration = durationFld.getText();
         String localisation = localisationFld.getText();
-
-        if (lib.isEmpty() || prix.isEmpty() || desc.isEmpty() || prog.isEmpty() || ville.isEmpty() || duration.isEmpty() || localisation.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Remplissez tous les données SVP !");
-            alert.showAndWait();
-        } else {
-            ExcursioncategorieService cs = new ExcursioncategorieService();
-            excursioncat = cs.getCategorie(cat);
-            System.out.println(excursioncat);
-            Excursion p2 = new Excursion(excursioncat.getId(), lib, desc, prog, ville, prix, duration, localisation);
-            ExcursionService ps = new ExcursionService();
-            try {
-                ps.ajouterr(p2);
-                Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
-                alert2.setHeaderText(null);
-                alert2.setContentText("Ajouté avec succés !");
-                alert2.showAndWait();
-
-            } catch (SQLException ex) {
-                Logger.getLogger(ExcursionAddFXMLController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
+        ExcursioncategorieService cs = new ExcursioncategorieService();
+        excursioncat = cs.getCategorie(cat);
+        Excursion p2 = new Excursion(studentId, excursioncat.getId(), lib, desc, prog, ville, prix, duration, localisation);
+        ExcursionService ps = new ExcursionService();
+        ps.modifer(p2);
+        Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+        alert2.setHeaderText(null);
+        alert2.setContentText("Modifié avec succés !");
+        alert2.showAndWait();
     }
 
-    private void populateCategories() {
+    void setTextField(int id, String lib, int cat, String prix, String desc, String prog, String ville, String duration, String localisation) {
+
+        studentId = id;
+        libFld.setText(lib);
+        prixFld.setText(prix);
+        descriptionFld.setText(desc);
+        progFld.setText(prog);
+        villeFld.setText(ville);
+        durationFld.setText(duration);
+        localisationFld.setText(localisation);
+        /**set selected categori**/
+        ExcursioncategorieService cs = new ExcursioncategorieService();
+        excursioncat = cs.findById(cat);
+        catCombo.setValue(excursioncat.getLibelle());
+    }
+
+        private void populateCategories() {
         ExcursioncategorieService ps = new ExcursioncategorieService();
         ObservableList<String> ExcursioncategorieList = ps.getExcursioncategorieListLibelle();
         catCombo.setItems(ExcursioncategorieList);
@@ -109,12 +107,11 @@ public class ExcursionAddFXMLController implements Initializable {
     @FXML
     private void handleClose(MouseEvent event) {
         if (event.getSource() == btnClose) {
-            // get a handle to the stage
+             // get a handle to the stage
             Stage stage = (Stage) btnClose.getScene().getWindow();
             // do what you have to do
             stage.close();
         }
     }
-  
 
 }

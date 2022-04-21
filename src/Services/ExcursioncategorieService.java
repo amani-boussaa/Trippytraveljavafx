@@ -7,8 +7,11 @@ import Utils.MyDB;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-public class ExcursioncategorieService implements IService<Excursioncategorie>{
+public class ExcursioncategorieService implements IService<Excursioncategorie> {
+
     Connection con;
     Statement stm;
 
@@ -40,9 +43,9 @@ public class ExcursioncategorieService implements IService<Excursioncategorie>{
         ResultSet rst = stm.executeQuery(req);
         System.out.println(rst.toString());
         List<Excursioncategorie> Excursioncategories = new ArrayList<Excursioncategorie>();
-        while(rst.next()){
+        while (rst.next()) {
 
-            Excursioncategorie p = new Excursioncategorie(rst.getInt("Excursioncategorie_id"),rst.getString("libelle"));
+            Excursioncategorie p = new Excursioncategorie(rst.getInt("id"), rst.getString("libelle"));
             Excursioncategories.add(p);
 
         }
@@ -52,19 +55,18 @@ public class ExcursioncategorieService implements IService<Excursioncategorie>{
 
     public void supprimer(int id) {
         try {
-            String req1 ="Delete from excursioncategorie where id=? ;";
+            String req1 = "Delete from excursioncategorie where id=? ;";
             PreparedStatement ps = con.prepareStatement(req1);
 
             ps.setInt(1, id);
             if (ps.executeUpdate() != 0) {
                 System.out.println("excursioncategorie Deleted");
 
-
-            }else
+            } else {
                 System.out.println("id excursioncategorie not found!!!");
+            }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-
 
         }
     }
@@ -72,7 +74,7 @@ public class ExcursioncategorieService implements IService<Excursioncategorie>{
     @Override
     public void modifer(Excursioncategorie p) {
         try {
-            String req1 = "UPDATE `excursion` SET  libelle=? where id= ?;";
+            String req1 = "UPDATE `excursioncategorie` SET  libelle=? where id= ?;";
             PreparedStatement ps = con.prepareStatement(req1);
             ps.setString(1, p.getLibelle());
             ps.setInt(2, p.getId());
@@ -83,10 +85,83 @@ public class ExcursioncategorieService implements IService<Excursioncategorie>{
                 System.out.println("non ");
             }
 
-
-
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public ObservableList<Excursioncategorie> getExcursioncategorieList() {
+        ObservableList<Excursioncategorie> Excursioncategories = FXCollections.observableArrayList();
+        String req = "Select * from `excursioncategorie`";
+        try {
+            stm = con.createStatement();
+            ResultSet rst = stm.executeQuery(req);
+            System.out.println(rst.toString());
+            while (rst.next()) {
+
+                Excursioncategorie p = new Excursioncategorie(rst.getInt("id"), rst.getString("libelle"));
+                Excursioncategories.add(p);
+
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Excursioncategories;
+
+    }
+
+    public ObservableList<String> getExcursioncategorieListLibelle() {
+        ObservableList<String> Excursioncategories = FXCollections.observableArrayList();
+        String req = "Select * from `excursioncategorie`";
+        try {
+            stm = con.createStatement();
+            ResultSet rst = stm.executeQuery(req);
+            System.out.println(rst.toString());
+            while (rst.next()) {
+                Excursioncategories.add(rst.getString("libelle"));
+
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Excursioncategories;
+
+    }
+
+    public Excursioncategorie getCategorie(String lib) {
+        Excursioncategorie cat = null;
+        String req = "SELECT * FROM `excursioncategorie` WHERE `libelle` = '" + lib + "'";
+        try {
+            stm = con.createStatement();
+            ResultSet rst = stm.executeQuery(req);
+            System.out.println(rst.toString());
+            if (rst.next()) {
+                cat = new Excursioncategorie();
+                cat.setId(rst.getInt("id"));
+                cat.setLibelle(rst.getString("libelle"));
+                
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return cat;
+    }
+    public Excursioncategorie findById(Integer id) {
+        Excursioncategorie cat = null;
+        String req = "SELECT * FROM `excursioncategorie` WHERE `id` = " + id ;
+        try {
+            stm = con.createStatement();
+            ResultSet rst = stm.executeQuery(req);
+            System.out.println(rst.toString());
+            if (rst.next()) {
+                cat = new Excursioncategorie();
+                cat.setId(rst.getInt("id"));
+                cat.setLibelle(rst.getString("libelle"));
+                
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return cat;
     }
 }

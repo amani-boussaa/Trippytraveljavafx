@@ -1,5 +1,7 @@
 package Entities;
 
+import Services.ExcursioncategorieService;
+
 public class Excursion {
     private int id,excursioncategorie_id;
     private String libelle,description,programme,ville,prix,duration,localisation;
@@ -7,15 +9,11 @@ public class Excursion {
     public Excursion() {
     }
 
-    public Excursion(int excursioncategorie_id, String libelle, String description, String programme, String ville, String prix, String duration, String localisation) {
+    public Excursion(int id, String libelle, int excursioncategorie_id, String prix) {
+        this.id = id;
         this.excursioncategorie_id = excursioncategorie_id;
         this.libelle = libelle;
-        this.description = description;
-        this.programme = programme;
-        this.ville = ville;
         this.prix = prix;
-        this.duration = duration;
-        this.localisation = localisation;
     }
 
     public Excursion(int id, int excursioncategorie_id, String libelle, String description, String programme, String ville, String prix, String duration, String localisation) {
@@ -28,7 +26,22 @@ public class Excursion {
         this.prix = prix;
         this.duration = duration;
         this.localisation = localisation;
+        
     }
+
+   
+    public Excursion(int excursioncategorie_id, String libelle, String description, String programme, String ville, String prix, String duration, String localisation) {
+        this.excursioncategorie_id = excursioncategorie_id;
+        this.libelle = libelle;
+        this.description = description;
+        this.programme = programme;
+        this.ville = ville;
+        this.prix = prix;
+        this.duration = duration;
+        this.localisation = localisation;
+    }
+
+    
 
     public int getId() {
         return id;
