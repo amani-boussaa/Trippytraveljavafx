@@ -153,9 +153,9 @@
                         <Insets />
                      </opaqueInsets>
                   </ComboBox>
-                  <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" stylesheets="@../css/stylel.css">
+                  <Button graphicTextGap="15.0" mnemonicParsing="false" onMouseClicked="#getAddview" prefHeight="25.0" prefWidth="33.0" stylesheets="@../css/stylel.css">
                      <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" onMouseClicked="#getAddviewExcursion" size="15" text="" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="15" text="" />
                      </graphic>
                      <HBox.margin>
                         <Insets right="10.0" />

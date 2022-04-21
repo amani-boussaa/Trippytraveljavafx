@@ -9,6 +9,7 @@ import Entities.Excursion;
 import Services.ExcursionService;
 import Utils.MyDB;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,8 +24,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -36,6 +40,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -112,7 +117,19 @@ public class MainFXMLController implements Initializable {
     }
 
     @FXML
-    private void getAddviewExcursion(MouseEvent event) {
+    private void getAddview(MouseEvent event) {
+        try {
+            Parent parent;
+            parent = FXMLLoader.load(getClass().getResource("/Gui/ExcursionAddFXML.fxml"));
+            Scene scene= new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Ajouter excursion");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
     }
 
 

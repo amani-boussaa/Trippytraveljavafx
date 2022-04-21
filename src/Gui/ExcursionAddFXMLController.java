@@ -5,9 +5,18 @@
  */
 package Gui;
 
+import Entities.Excursion;
+import Services.ExcursionService;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -16,12 +25,68 @@ import javafx.fxml.Initializable;
  */
 public class ExcursionAddFXMLController implements Initializable {
 
+    @FXML
+    private TextField libFld;
+    @FXML
+    private TextField catFld;
+    @FXML
+    private TextField prixFld;
+    @FXML
+    private TextField descriptionFld;
+    @FXML
+    private TextField progFld;
+    @FXML
+    private TextField villeFld;
+    @FXML
+    private TextField durationFld;
+    @FXML
+    private TextField localisationFld;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
+    @FXML
+    private void insert(MouseEvent event) {
+        String lib = libFld.getText();      
+        String cattxt = catFld.getText();
+        int cat = 1;  
+        if(cattxt.isEmpty()){
+             cat = 1;  
+        }else{
+             cat = Integer.parseInt(catFld.getText());
+        }
+        String prix = prixFld.getText();
+        String desc = descriptionFld.getText();
+        String prog = progFld.getText();
+        String ville = villeFld.getText();
+        String duration = durationFld.getText();
+        String localisation = localisationFld.getText();
+
+        if (lib.isEmpty() || cattxt.isEmpty()|| prix.isEmpty() || desc.isEmpty() || prog.isEmpty() || ville.isEmpty() || duration.isEmpty() || localisation.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Remplissez tous les données SVP !");
+            alert.showAndWait();
+        } else {
+            Excursion p2 = new Excursion(cat, lib, desc, prog, ville, prix, duration, localisation);
+            ExcursionService ps = new ExcursionService();
+            try {
+                ps.ajouterr(p2);
+                Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                alert2.setHeaderText(null);
+                alert2.setContentText("Ajouté avec succés !");
+                alert2.showAndWait();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(ExcursionAddFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
+
 }
