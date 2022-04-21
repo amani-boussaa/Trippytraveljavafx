@@ -9,8 +9,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class ExcursionService implements IService<Excursion> {
+
     Connection con;
     Statement stm;
 
@@ -49,32 +52,52 @@ public class ExcursionService implements IService<Excursion> {
         ResultSet rst = stm.executeQuery(req);
         System.out.println(rst.toString());
         List<Excursion> Excursions = new ArrayList<Excursion>();
-        while(rst.next()){
+        while (rst.next()) {
 
-            Excursion p = new Excursion(rst.getInt("excursioncategorie_id"),rst.getString("libelle"),rst.getString("description"),rst.getString("programme"),rst.getString("ville"),rst.getString("prix"),rst.getString("duration"),rst.getString("localisation"));
+            Excursion p = new Excursion(rst.getInt("excursioncategorie_id"), rst.getString("libelle"), rst.getString("description"), rst.getString("programme"), rst.getString("ville"), rst.getString("prix"), rst.getString("duration"), rst.getString("localisation"));
             Excursions.add(p);
-
 
         }
         return Excursions;
 
     }
 
+    public ObservableList<Excursion> getExcursionList() {
+        ObservableList<Excursion> Excursions = FXCollections.observableArrayList();
+        String req = "Select * from `Excursion`";
+        try {
+            stm = con.createStatement();
+            ResultSet rst = stm.executeQuery(req);
+            System.out.println(rst.toString());
+            while (rst.next()) {
+
+                Excursion p = new Excursion(rst.getInt("id"),rst.getInt("excursioncategorie_id"), rst.getString("libelle"), rst.getString("description"), rst.getString("programme"), rst.getString("ville"), rst.getString("prix"), rst.getString("duration"), rst.getString("localisation"));
+                Excursions.add(p);
+
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Excursions;
+
+    }
+
+  
+
     public void supprimer(int id) {
         try {
-            String req1 ="Delete from excursion where id=? ;";
+            String req1 = "Delete from excursion where id=? ;";
             PreparedStatement ps = con.prepareStatement(req1);
 
             ps.setInt(1, id);
             if (ps.executeUpdate() != 0) {
                 System.out.println("excursion Deleted");
 
-
-            }else
+            } else {
                 System.out.println("id excursion not found!!!");
+            }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-
 
         }
     }
@@ -99,8 +122,6 @@ public class ExcursionService implements IService<Excursion> {
             } else {
                 System.out.println("non ");
             }
-
-
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

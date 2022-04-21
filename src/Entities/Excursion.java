@@ -7,6 +7,14 @@ public class Excursion {
     public Excursion() {
     }
 
+    public Excursion(int id, String libelle, int excursioncategorie_id, String prix) {
+        this.id = id;
+        this.excursioncategorie_id = excursioncategorie_id;
+        this.libelle = libelle;
+        this.prix = prix;
+    }
+
+    
     public Excursion(int excursioncategorie_id, String libelle, String description, String programme, String ville, String prix, String duration, String localisation) {
         this.excursioncategorie_id = excursioncategorie_id;
         this.libelle = libelle;
