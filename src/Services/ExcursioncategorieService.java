@@ -144,13 +144,24 @@ public class ExcursioncategorieService implements IService<Excursioncategorie> {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        /* Excursioncategorie cat = null;
-        if (rs.next()) {
-            cat = new Excursioncategorie();
-            cat.setId(rs.getInt("id"));
-            cat.setLibelle(rs.getString("libelle"));
+        return cat;
+    }
+    public Excursioncategorie findById(Integer id) {
+        Excursioncategorie cat = null;
+        String req = "SELECT * FROM `excursioncategorie` WHERE `id` = " + id ;
+        try {
+            stm = con.createStatement();
+            ResultSet rst = stm.executeQuery(req);
+            System.out.println(rst.toString());
+            if (rst.next()) {
+                cat = new Excursioncategorie();
+                cat.setId(rst.getInt("id"));
+                cat.setLibelle(rst.getString("libelle"));
+                
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        return cat;*/
         return cat;
     }
 }

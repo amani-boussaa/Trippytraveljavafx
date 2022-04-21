@@ -160,7 +160,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="10.0" layoutX="236.0" layoutY="31.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="112.0" styleClass="border-button" stylesheets="@../css/stylel.css" text="Annuler">
+                  <Button fx:id="btnClose" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="10.0" layoutX="236.0" layoutY="31.0" mnemonicParsing="false" onMouseClicked="#handleClose" prefHeight="37.0" prefWidth="112.0" styleClass="border-button" stylesheets="@../css/stylel.css" text="Annuler">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>

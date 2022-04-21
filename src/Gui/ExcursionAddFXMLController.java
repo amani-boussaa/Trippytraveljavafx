@@ -21,6 +21,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -34,8 +35,6 @@ public class ExcursionAddFXMLController implements Initializable {
 
     @FXML
     private TextField libFld;
-    @FXML
-    private TextField catFld;
     @FXML
     private TextField prixFld;
     @FXML
@@ -52,6 +51,8 @@ public class ExcursionAddFXMLController implements Initializable {
     private ComboBox<String> catCombo;
    
     Excursioncategorie excursioncat = null;
+    @FXML
+    private Button btnClose;
     /**
      * Initializes the controller class.
      */
@@ -64,13 +65,6 @@ public class ExcursionAddFXMLController implements Initializable {
     @FXML
     private void insert(MouseEvent event) {
         String lib = libFld.getText();
-        /*String cattxt = catFld.getText();
-        int cat = 1;
-        if (cattxt.isEmpty()) {
-            cat = 1;
-        } else {
-            cat = Integer.parseInt(catFld.getText());
-        }*/
         String cat = catCombo.getSelectionModel().getSelectedItem().toString();   
         String prix = prixFld.getText();
         String desc = descriptionFld.getText();
@@ -108,6 +102,13 @@ public class ExcursionAddFXMLController implements Initializable {
         ExcursioncategorieService ps = new ExcursioncategorieService();
         ObservableList<String> ExcursioncategorieList = ps.getExcursioncategorieListLibelle();
         catCombo.setItems(ExcursioncategorieList);
+    }
+
+    @FXML
+    private void handleClose(MouseEvent event) {
+        if (event.getSource() == btnClose) {
+            System.exit(0);
+        }
     }
 
     

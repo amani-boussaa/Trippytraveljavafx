@@ -125,9 +125,8 @@
               <columns>
                 <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
                 <TableColumn fx:id="libCol" prefWidth="75.0" text="Libellé" />
-                  <TableColumn fx:id="catCol" prefWidth="75.0" text="Catégorie" />
                   <TableColumn fx:id="prixCol" prefWidth="75.0" text="Prix" />
-                  <TableColumn fx:id="editCol"  prefWidth="75.0" style="-fx-alignment: center;"  />
+                  <TableColumn fx:id="editCol" prefWidth="75.0" style="-fx-alignment: center;" />
 
               </columns>
                <columnResizePolicy>

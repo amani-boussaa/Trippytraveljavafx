@@ -69,8 +69,7 @@ public class MainFXMLController implements Initializable {
     private TableColumn<Excursion, String> idCol;
     @FXML
     private TableColumn<Excursion, String> libCol;
-    @FXML
-    private TableColumn<Excursion, String> catCol;
+    
     @FXML
     private TableColumn<Excursion, String> prixCol;
     @FXML
@@ -148,7 +147,6 @@ public class MainFXMLController implements Initializable {
         ObservableList<Excursion> ExcursionList = ps.getExcursionList();
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         libCol.setCellValueFactory(new PropertyValueFactory<>("libelle"));
-        catCol.setCellValueFactory(new PropertyValueFactory<>("excursioncategorie_id"));
         prixCol.setCellValueFactory(new PropertyValueFactory<>("prix"));
         //excursionTable.setItems(ExcursionList);
         //add cell of button edit 

@@ -1,6 +1,7 @@
 package Services;
 
 import Entities.Excursion;
+import Entities.Excursioncategorie;
 import Utils.MyDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -55,7 +56,7 @@ public class ExcursionService implements IService<Excursion> {
         while (rst.next()) {
 
             Excursion p = new Excursion(rst.getInt("excursioncategorie_id"), rst.getString("libelle"), rst.getString("description"), rst.getString("programme"), rst.getString("ville"), rst.getString("prix"), rst.getString("duration"), rst.getString("localisation"));
-            Excursions.add(p);
+             Excursions.add(p);
 
         }
         return Excursions;
@@ -70,14 +71,15 @@ public class ExcursionService implements IService<Excursion> {
             ResultSet rst = stm.executeQuery(req);
             System.out.println(rst.toString());
             while (rst.next()) {
-
                 Excursion p = new Excursion(rst.getInt("id"),rst.getInt("excursioncategorie_id"), rst.getString("libelle"), rst.getString("description"), rst.getString("programme"), rst.getString("ville"), rst.getString("prix"), rst.getString("duration"), rst.getString("localisation"));
+              
                 Excursions.add(p);
 
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        System.out.println(Excursions);
         return Excursions;
 
     }
