@@ -23,7 +23,7 @@ import javafx.scene.input.MouseEvent;
  *
  * @author amani
  */
-public class ExcursionAddFXMLController implements Initializable {
+public class ExcursionUpdateFXMLController implements Initializable {
 
     @FXML
     private TextField libFld;
@@ -41,7 +41,7 @@ public class ExcursionAddFXMLController implements Initializable {
     private TextField durationFld;
     @FXML
     private TextField localisationFld;
-
+    int studentId;
 
     /**
      * Initializes the controller class.
@@ -52,7 +52,7 @@ public class ExcursionAddFXMLController implements Initializable {
     }
 
     @FXML
-    private void insert(MouseEvent event) {
+    private void update(MouseEvent event) {
         String lib = libFld.getText();
         String cattxt = catFld.getText();
         int cat = 1;
@@ -68,29 +68,26 @@ public class ExcursionAddFXMLController implements Initializable {
         String duration = durationFld.getText();
         String localisation = localisationFld.getText();
 
-        if (lib.isEmpty() || cattxt.isEmpty() || prix.isEmpty() || desc.isEmpty() || prog.isEmpty() || ville.isEmpty() || duration.isEmpty() || localisation.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Remplissez tous les données SVP !");
-            alert.showAndWait();
-        } else {
-            Excursion p2 = new Excursion(cat, lib, desc, prog, ville, prix, duration, localisation);
-            ExcursionService ps = new ExcursionService();
-            try {
-                ps.ajouterr(p2);
-                Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
-                alert2.setHeaderText(null);
-                alert2.setContentText("Ajouté avec succés !");
-                alert2.showAndWait();
-
-            } catch (SQLException ex) {
-                Logger.getLogger(ExcursionAddFXMLController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
+        Excursion p2 = new Excursion(studentId, cat, lib, desc, prog, ville, prix, duration, localisation);
+        ExcursionService ps = new ExcursionService();
+        ps.modifer(p2);
+        Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+        alert2.setHeaderText(null);
+        alert2.setContentText("Modifié avec succés !");
+        alert2.showAndWait();
     }
 
-    
+    void setTextField(int id, String lib, int cat, String prix, String desc, String prog, String ville, String duration, String localisation) {
 
-    
+        studentId = id;
+        libFld.setText(lib);
+        catFld.setText(String.valueOf(cat));
+        prixFld.setText(prix);
+        descriptionFld.setText(desc);
+        progFld.setText(prog);
+        villeFld.setText(ville);
+        durationFld.setText(duration);
+        localisationFld.setText(localisation);
+    }
+
 }

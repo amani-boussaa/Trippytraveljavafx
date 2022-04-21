@@ -4,6 +4,11 @@
     -fx-background-color: #146886;
     -fx-text-fill:#ffffff;
 }
+.button:hover,.button:focused,.border-button:hover,.border-button:focused{
+     -fx-background-color:#1f232a;
+    -fx-border-color: WHITE;
+    -fx-border-width: 3px 3px 3px 3px;
+}
 .sidebaritem{
       -fx-background-color:#222831;
 }
@@ -19,4 +24,8 @@
 }
 .table-view .column-header .label{
      -fx-text-fill:#ffffff;
+}
+.border-button{
+    -fx-background-color:#ff1744;
+    -fx-text-fill:white;
 }

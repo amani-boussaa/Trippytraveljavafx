@@ -7,16 +7,10 @@ package Gui;
 
 import Entities.Excursion;
 import Services.ExcursionService;
-import Utils.MyDB;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,16 +25,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -79,8 +73,13 @@ public class MainFXMLController implements Initializable {
     private TableColumn<Excursion, String> catCol;
     @FXML
     private TableColumn<Excursion, String> prixCol;
-    
-    
+    @FXML
+    private TableColumn<Excursion, String> editCol;
+
+    Excursion excursion = null;
+
+    ObservableList<Excursion> ExcursionList = FXCollections.observableArrayList();
+
     /**
      * Initializes the controller class.
      */
@@ -121,7 +120,7 @@ public class MainFXMLController implements Initializable {
         try {
             Parent parent;
             parent = FXMLLoader.load(getClass().getResource("/Gui/ExcursionAddFXML.fxml"));
-            Scene scene= new Scene(parent);
+            Scene scene = new Scene(parent);
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle("Ajouter excursion");
@@ -129,23 +128,102 @@ public class MainFXMLController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
+
     }
 
-
+    @FXML
+    private void refreshTable() {
+        ExcursionList.clear();
+        ExcursionService ps = new ExcursionService();
+        ObservableList<Excursion> ExcursionList = ps.getExcursionList();
+        excursionTable.setItems(ExcursionList);
+    }
 
     @FXML
     private void print(MouseEvent event) {
     }
-    
-    @FXML
-    public void showAll(){
+
+    public void showAll() {
         ExcursionService ps = new ExcursionService();
-        ObservableList<Excursion> list = ps.getExcursionList();
-        idCol.setCellValueFactory(new PropertyValueFactory<>("id")); 
-        libCol.setCellValueFactory(new PropertyValueFactory<>("libelle"));     
-        catCol.setCellValueFactory(new PropertyValueFactory<>("excursioncategorie_id")); 
+        ObservableList<Excursion> ExcursionList = ps.getExcursionList();
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        libCol.setCellValueFactory(new PropertyValueFactory<>("libelle"));
+        catCol.setCellValueFactory(new PropertyValueFactory<>("excursioncategorie_id"));
         prixCol.setCellValueFactory(new PropertyValueFactory<>("prix"));
-        excursionTable.setItems(list);
+        //excursionTable.setItems(ExcursionList);
+        //add cell of button edit 
+        Callback<TableColumn<Excursion, String>, TableCell<Excursion, String>> cellFoctory = (TableColumn<Excursion, String> param) -> {
+            // make cell containing buttons
+            final TableCell<Excursion, String> cell = new TableCell<Excursion, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    //that cell created only on non-empty rows
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+
+                    } else {
+
+                        FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
+                        FontAwesomeIconView editIcon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL_SQUARE);
+
+                        deleteIcon.setStyle(
+                                " -fx-cursor: hand ;"
+                                + "-glyph-size:28px;"
+                                + "-fx-fill:#ff1744;"
+                        );
+                        editIcon.setStyle(
+                                " -fx-cursor: hand ;"
+                                + "-glyph-size:28px;"
+                                + "-fx-fill:#00E676;"
+                        );
+                        deleteIcon.setOnMouseClicked((MouseEvent event) -> {
+                            excursion = excursionTable.getSelectionModel().getSelectedItem();
+                            ps.supprimer(excursion.getId());
+                            refreshTable();
+                        });
+                        editIcon.setOnMouseClicked((MouseEvent event) -> {
+
+                            excursion = excursionTable.getSelectionModel().getSelectedItem();
+                            FXMLLoader loader = new FXMLLoader();
+                            loader.setLocation(getClass().getResource("/Gui/ExcursionUpdateFXML.fxml"));
+                            try {
+                                loader.load();
+                            } catch (IOException ex) {
+                                Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+
+                            ExcursionUpdateFXMLController updateExcursionController = loader.getController();
+                            updateExcursionController.setTextField(excursion.getId(), excursion.getLibelle(),
+                                    excursion.getExcursioncategorie_id(),
+                                    excursion.getPrix(), excursion.getDescription(), excursion.getProgramme(), excursion.getVille(),
+                                    excursion.getDuration(), excursion.getLocalisation());
+                            Parent parent = loader.getRoot();
+                            Stage stage = new Stage();
+                            stage.setScene(new Scene(parent));
+                            stage.initStyle(StageStyle.UTILITY);
+                            stage.show();
+
+                        });
+
+                        HBox managebtn = new HBox(editIcon, deleteIcon);
+                        managebtn.setStyle("-fx-alignment:center");
+                        HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 3));
+                        HBox.setMargin(editIcon, new Insets(2, 3, 0, 2));
+
+                        setGraphic(managebtn);
+
+                        setText(null);
+
+                    }
+                }
+
+            };
+
+            return cell;
+        };
+        editCol.setCellFactory(cellFoctory);
+        excursionTable.setItems(ExcursionList);
     }
 }

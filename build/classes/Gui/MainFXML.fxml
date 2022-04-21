@@ -127,6 +127,8 @@
                 <TableColumn fx:id="libCol" prefWidth="75.0" text="Libellé" />
                   <TableColumn fx:id="catCol" prefWidth="75.0" text="Catégorie" />
                   <TableColumn fx:id="prixCol" prefWidth="75.0" text="Prix" />
+                  <TableColumn fx:id="editCol"  prefWidth="75.0" style="-fx-alignment: center;"  />
+
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -161,7 +163,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button graphicTextGap="15.0" mnemonicParsing="false" onMouseClicked="#showAll" prefHeight="25.0" prefWidth="33.0" stylesheets="@../css/stylel.css">
+                  <Button graphicTextGap="15.0" mnemonicParsing="false" onMouseClicked="#refreshTable" prefHeight="25.0" prefWidth="33.0" stylesheets="@../css/stylel.css">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" size="15" text="" />
                      </graphic>
