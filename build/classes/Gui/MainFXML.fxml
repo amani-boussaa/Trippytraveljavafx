@@ -167,11 +167,6 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" size="15" text="" />
                      </graphic>
                   </Button>
-                  <Button graphicTextGap="15.0" mnemonicParsing="false" onMouseClicked="#print" prefHeight="25.0" prefWidth="33.0" stylesheets="@../css/stylel.css">
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="PRINT" size="15" text="" />
-                     </graphic>
-                  </Button>
                </children>
             </HBox>
          </children>

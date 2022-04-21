@@ -110,7 +110,10 @@ public class MainFXMLController implements Initializable {
     @FXML
     private void handleClose(MouseEvent event) {
         if (event.getSource() == btnClose) {
-            System.exit(0);
+             // get a handle to the stage
+            Stage stage = (Stage) btnClose.getScene().getWindow();
+            // do what you have to do
+            stage.close();
         }
     }
 
@@ -138,9 +141,6 @@ public class MainFXMLController implements Initializable {
         excursionTable.setItems(ExcursionList);
     }
 
-    @FXML
-    private void print(MouseEvent event) {
-    }
 
     public void showAll() {
         ExcursionService ps = new ExcursionService();

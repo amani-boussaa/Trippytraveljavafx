@@ -71,25 +71,6 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="600.0">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Catégorie" wrappingWidth="103.13671875">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Text>
-                  <TextField fx:id="catFld" prefHeight="25.0" prefWidth="482.0" />
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="600.0">
-               <children>
                   <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" wrappingWidth="103.13671875">
                      <font>
                         <Font name="System Bold" size="14.0" />

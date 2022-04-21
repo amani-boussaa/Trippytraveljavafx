@@ -25,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -49,10 +50,11 @@ public class ExcursionAddFXMLController implements Initializable {
     private TextField localisationFld;
     @FXML
     private ComboBox<String> catCombo;
-   
+
     Excursioncategorie excursioncat = null;
     @FXML
     private Button btnClose;
+
     /**
      * Initializes the controller class.
      */
@@ -65,7 +67,7 @@ public class ExcursionAddFXMLController implements Initializable {
     @FXML
     private void insert(MouseEvent event) {
         String lib = libFld.getText();
-        String cat = catCombo.getSelectionModel().getSelectedItem().toString();   
+        String cat = catCombo.getSelectionModel().getSelectedItem().toString();
         String prix = prixFld.getText();
         String desc = descriptionFld.getText();
         String prog = progFld.getText();
@@ -73,7 +75,7 @@ public class ExcursionAddFXMLController implements Initializable {
         String duration = durationFld.getText();
         String localisation = localisationFld.getText();
 
-        if (lib.isEmpty()  || prix.isEmpty() || desc.isEmpty() || prog.isEmpty() || ville.isEmpty() || duration.isEmpty() || localisation.isEmpty()) {
+        if (lib.isEmpty() || prix.isEmpty() || desc.isEmpty() || prog.isEmpty() || ville.isEmpty() || duration.isEmpty() || localisation.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Remplissez tous les données SVP !");
@@ -107,11 +109,12 @@ public class ExcursionAddFXMLController implements Initializable {
     @FXML
     private void handleClose(MouseEvent event) {
         if (event.getSource() == btnClose) {
-            System.exit(0);
+            // get a handle to the stage
+            Stage stage = (Stage) btnClose.getScene().getWindow();
+            // do what you have to do
+            stage.close();
         }
     }
+  
 
-    
-
-    
 }

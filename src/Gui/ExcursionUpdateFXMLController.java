@@ -22,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -32,8 +33,6 @@ public class ExcursionUpdateFXMLController implements Initializable {
 
     @FXML
     private TextField libFld;
-    @FXML
-    private TextField catFld;
     @FXML
     private TextField prixFld;
     @FXML
@@ -65,13 +64,6 @@ public class ExcursionUpdateFXMLController implements Initializable {
     @FXML
     private void update(MouseEvent event) {
         String lib = libFld.getText();
-        /*String cattxt = catFld.getText();
-        int cat = 1;
-        if (cattxt.isEmpty()) {
-            cat = 1;
-        } else {
-            cat = Integer.parseInt(catFld.getText());
-        }*/
         String cat = catCombo.getSelectionModel().getSelectedItem().toString();
         String prix = prixFld.getText();
         String desc = descriptionFld.getText();
@@ -94,7 +86,6 @@ public class ExcursionUpdateFXMLController implements Initializable {
 
         studentId = id;
         libFld.setText(lib);
-        catFld.setText(String.valueOf(cat));
         prixFld.setText(prix);
         descriptionFld.setText(desc);
         progFld.setText(prog);
@@ -116,7 +107,10 @@ public class ExcursionUpdateFXMLController implements Initializable {
     @FXML
     private void handleClose(MouseEvent event) {
         if (event.getSource() == btnClose) {
-            System.exit(0);
+             // get a handle to the stage
+            Stage stage = (Stage) btnClose.getScene().getWindow();
+            // do what you have to do
+            stage.close();
         }
     }
 
