@@ -3,8 +3,11 @@ package Entities;
 import Services.ExcursioncategorieService;
 
 public class Excursion {
-    private int id,excursioncategorie_id;
-    private String libelle,description,programme,ville,prix,duration,localisation;
+
+    private int id, excursioncategorie_id;
+    private String libelle, description, programme, ville, prix, duration, localisation;
+    private String imgSrc;
+    private String color;
 
     public Excursion() {
     }
@@ -26,10 +29,9 @@ public class Excursion {
         this.prix = prix;
         this.duration = duration;
         this.localisation = localisation;
-        
+
     }
 
-   
     public Excursion(int excursioncategorie_id, String libelle, String description, String programme, String ville, String prix, String duration, String localisation) {
         this.excursioncategorie_id = excursioncategorie_id;
         this.libelle = libelle;
@@ -40,8 +42,6 @@ public class Excursion {
         this.duration = duration;
         this.localisation = localisation;
     }
-
-    
 
     public int getId() {
         return id;
@@ -115,18 +115,26 @@ public class Excursion {
         this.localisation = localisation;
     }
 
+    public String getImgSrc() {
+        return imgSrc;
+    }
+
+    public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     @Override
     public String toString() {
-        return "Excursion{" +
-                "id=" + id +
-                ", excursioncategorie_id=" + excursioncategorie_id +
-                ", libelle='" + libelle + '\'' +
-                ", description='" + description + '\'' +
-                ", programme='" + programme + '\'' +
-                ", ville='" + ville + '\'' +
-                ", prix='" + prix + '\'' +
-                ", duration='" + duration + '\'' +
-                ", localisation='" + localisation + '\'' +
-                '}';
+        return "Excursion{" + "id=" + id + ", excursioncategorie_id=" + excursioncategorie_id + ", libelle=" + libelle + ", description=" + description + ", programme=" + programme + ", ville=" + ville + ", prix=" + prix + ", duration=" + duration + ", localisation=" + localisation + ", imgSrc=" + imgSrc + ", color=" + color + '}';
     }
+
+    
 }

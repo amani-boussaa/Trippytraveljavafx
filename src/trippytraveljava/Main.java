@@ -20,12 +20,12 @@ public class Main extends Application{
 
     Stage stage;
     Parent parent;
-    
+    public static final String CURRENCY = "$";
     @Override
     public void start(Stage primaryStage) {
         this.stage= primaryStage;
         try {
-            parent = FXMLLoader.load(getClass().getResource("/Gui/ExcursionFXML.fxml"));
+            parent = FXMLLoader.load(getClass().getResource("/Gui/MarketExcursionFXML.fxml"));
             Scene scene= new Scene(parent);
             stage.setScene(scene);
             stage.setTitle("Trippy travel");
