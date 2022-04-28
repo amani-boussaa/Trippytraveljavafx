@@ -12,10 +12,13 @@ import Services.ExcursionService;
 import Services.ExcursioncategorieService;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import java.awt.Color;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,6 +54,9 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.chart.fx.ChartViewer;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.PieSectionLabelGenerator;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.plot.PiePlot;
 
 /**
  * FXML Controller class
@@ -283,17 +289,18 @@ public class ExcursionFXMLController implements Initializable {
         ExcursionService ps = new ExcursionService();
         ObservableList<Chartexcursion> chartList = ps.chartcategorie();
 
-        
         Stage stage = new Stage();
         DefaultPieDataset data = new DefaultPieDataset();
         /*data.setValue("Category 1", 43.2);
         data.setValue("Category 2", 27.9);
         data.setValue("Category 3", 79.5);*/
         for (Chartexcursion tab : chartList) {
-             ExcursioncategorieService cs = new ExcursioncategorieService();
+            ExcursioncategorieService cs = new ExcursioncategorieService();
             excursioncat = cs.findById(tab.getExcursioncategorie_id());
             data.setValue(excursioncat.getLibelle(), tab.getCount());
+
         }
+
 // create a chart...
         JFreeChart chart = ChartFactory.createPieChart(
                 "Pie Chart-Excursion catégories",
@@ -302,6 +309,24 @@ public class ExcursionFXMLController implements Initializable {
                 true, // tooltips?
                 false // URLs?
         );
+        PiePlot plot = (PiePlot) chart.getPlot();
+         // random color for chart
+        for (Chartexcursion tab : chartList) {
+            ExcursioncategorieService cs = new ExcursioncategorieService();
+            excursioncat = cs.findById(tab.getExcursioncategorie_id());
+            // Java 'Color' class takes 3 floats, from 0 to 1.
+            Random rand = new Random();
+            float r = rand.nextFloat();
+            float g = rand.nextFloat();
+            float b = rand.nextFloat();
+            plot.setSectionPaint(excursioncat.getLibelle(), new Color(r, g, b));
+        }
+        //end random color for chart
+        plot.setSimpleLabels(true);
+
+        PieSectionLabelGenerator gen = new StandardPieSectionLabelGenerator(
+                "{0}: {1} ({2})", new DecimalFormat("0"), new DecimalFormat("0%"));
+        plot.setLabelGenerator(gen);
 // create and display a scene...
         ChartViewer viewer = new ChartViewer(chart);
         stage.setScene(new Scene(viewer));
