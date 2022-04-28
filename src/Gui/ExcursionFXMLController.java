@@ -16,6 +16,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +30,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -69,7 +72,7 @@ public class ExcursionFXMLController implements Initializable {
     private TableColumn<Excursion, String> idCol;
     @FXML
     private TableColumn<Excursion, String> libCol;
-    
+
     @FXML
     private TableColumn<Excursion, String> prixCol;
     @FXML
@@ -78,6 +81,8 @@ public class ExcursionFXMLController implements Initializable {
     Excursion excursion = null;
 
     ObservableList<Excursion> ExcursionList = FXCollections.observableArrayList();
+    @FXML
+    private TextField keywordTextField;
 
     /**
      * Initializes the controller class.
@@ -110,7 +115,7 @@ public class ExcursionFXMLController implements Initializable {
     @FXML
     private void handleClose(MouseEvent event) {
         if (event.getSource() == btnClose) {
-             // get a handle to the stage
+            // get a handle to the stage
             Stage stage = (Stage) btnClose.getScene().getWindow();
             // do what you have to do
             stage.close();
@@ -140,7 +145,6 @@ public class ExcursionFXMLController implements Initializable {
         ObservableList<Excursion> ExcursionList = ps.getExcursionList();
         excursionTable.setItems(ExcursionList);
     }
-
 
     public void showAll() {
         ExcursionService ps = new ExcursionService();
@@ -222,6 +226,41 @@ public class ExcursionFXMLController implements Initializable {
             return cell;
         };
         editCol.setCellFactory(cellFoctory);
-        excursionTable.setItems(ExcursionList);
+        //excursionTable.setItems(ExcursionList);
+        //recherche
+        FilteredList<Excursion> filteredData = new FilteredList<>(ExcursionList, b -> true);
+        keywordTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(Excursion -> {
+                if (newValue.isEmpty() || newValue == null) {
+                    return true;
+                }
+                String searchKeyword = newValue.toLowerCase();
+                if (Excursion.getLibelle().toLowerCase().indexOf(searchKeyword) > -1) {
+                    return true;//means we found a match in libelle exursion
+                }
+                if (Excursion.getDescription().toLowerCase().indexOf(searchKeyword) > -1) {
+                    return true;//means we found a match in libelle exursion
+                }
+                if (Excursion.getPrix().toLowerCase().indexOf(searchKeyword) > -1) {
+                    return true;//means we found a match in libelle exursion
+                }
+                if (Excursion.getProgramme().toLowerCase().indexOf(searchKeyword) > -1) {
+                    return true;//means we found a match in libelle exursion
+                }
+                if (Excursion.getLocalisation().toLowerCase().indexOf(searchKeyword) > -1) {
+                    return true;//means we found a match in libelle exursion
+                }
+                if (Excursion.getDuration().toLowerCase().indexOf(searchKeyword) > -1) {
+                    return true;//means we found a match in libelle exursion
+                }
+                return false;//no match found
+            });
+        });
+        SortedList<Excursion> sortedData = new SortedList<>(filteredData);
+        //bind sorted result with Table view
+        sortedData.comparatorProperty().bind(excursionTable.comparatorProperty());
+        //Apply filtered and sorted data to the table view
+        excursionTable.setItems(sortedData);
+
     }
 }

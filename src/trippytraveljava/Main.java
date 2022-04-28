@@ -25,7 +25,7 @@ public class Main extends Application{
     public void start(Stage primaryStage) {
         this.stage= primaryStage;
         try {
-            parent = FXMLLoader.load(getClass().getResource("/Gui/MarketExcursionFXML.fxml"));
+            parent = FXMLLoader.load(getClass().getResource("/Gui/ExcursionFXML.fxml"));
             Scene scene= new Scene(parent);
             stage.setScene(scene);
             stage.setTitle("Trippy travel");
@@ -35,6 +35,7 @@ public class Main extends Application{
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+        
     }
     /**
      * @param args the command line arguments

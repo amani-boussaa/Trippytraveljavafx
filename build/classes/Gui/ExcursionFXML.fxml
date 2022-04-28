@@ -148,7 +148,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </FontAwesomeIconView>
-                  <TextField prefHeight="25.0" prefWidth="249.0" />
+                  <TextField fx:id="keywordTextField" prefHeight="25.0" prefWidth="249.0" />
                   <ComboBox prefHeight="27.0" prefWidth="181.0" style="-fx-background-color: white; -fx-border-color: #146886;">
                      <opaqueInsets>
                         <Insets />

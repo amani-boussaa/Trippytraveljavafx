@@ -22,18 +22,18 @@ public class ItemExcursionController {
 
     @FXML
     private void click(MouseEvent mouseEvent) {
-        myListener.onClickListener(fruit);
+        myListener.onClickListener(excursion);
     }
 
-    private Excursion fruit;
+    private Excursion excursion;
     private MyListener myListener;
 
-    public void setData(Excursion fruit, MyListener myListener) {
-        this.fruit = fruit;
+    public void setData(Excursion excursion, MyListener myListener) {
+        this.excursion = excursion;
         this.myListener = myListener;
-        nameLabel.setText(fruit.getLibelle());
-        priceLable.setText(Main.CURRENCY + fruit.getPrix());
-        Image image = new Image(getClass().getResourceAsStream(fruit.getImgSrc()));
+        nameLabel.setText(excursion.getLibelle());
+        priceLable.setText(Main.CURRENCY + excursion.getPrix());
+        Image image = new Image(getClass().getResourceAsStream(excursion.getImgSrc()));
         img.setImage(image);
     }
 }

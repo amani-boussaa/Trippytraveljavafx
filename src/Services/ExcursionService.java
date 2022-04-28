@@ -46,7 +46,7 @@ public class ExcursionService implements IService<Excursion> {
 
     }
 
-    @Override
+    /*@Override
     public List<Excursion> afficher() throws SQLException {
         String req = "Select * from `Excursion`";
         stm = con.createStatement();
@@ -61,6 +61,30 @@ public class ExcursionService implements IService<Excursion> {
         }
         return Excursions;
 
+    }*/
+    @Override
+    public List<Excursion> afficher() throws SQLException {
+        List<Excursion> list =new ArrayList<>();
+        try {
+            String req = "select * from excursion";
+            Statement st = con.createStatement();
+            ResultSet rs =st.executeQuery(req);
+             
+            while(rs.next()){
+                Excursion p = new Excursion();
+                p.setId(rs.getInt("id"));
+                p.setLibelle(rs.getString("libelle"));
+                p.setPrix(rs.getString("prix"));
+                p.setImgSrc("/img/kiwi.png");
+                p.setColor("6A7324");
+                list.add(p);
+            }
+           
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+       
+        return list;
     }
 
     public ObservableList<Excursion> getExcursionList() {

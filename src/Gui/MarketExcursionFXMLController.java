@@ -20,12 +20,16 @@ import javafx.scene.layout.VBox;
 import trippytraveljava.Main;
 import trippytraveljava.MyListener;
 import Entities.Excursion;
+import Services.ExcursionService;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  * FXML Controller class
  *
@@ -56,8 +60,14 @@ public class MarketExcursionFXMLController implements Initializable {
     private List<Excursion> getData() {
         List<Excursion> fruits = new ArrayList<>();
         Excursion fruit;
-
-        fruit = new Excursion();
+          ExcursionService prodService = new ExcursionService();
+        try {
+            fruits.addAll(prodService.afficher());
+        } catch (SQLException ex) {
+            Logger.getLogger(MarketExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+return fruits;
+       /* fruit = new Excursion();
         fruit.setLibelle("Kiwi");
         fruit.setPrix("2.99");
         fruit.setImgSrc("/img/kiwi.png");
@@ -127,7 +137,7 @@ public class MarketExcursionFXMLController implements Initializable {
         fruit.setColor("E7C00F");
         fruits.add(fruit);
 
-        return fruits;
+        return fruits;*/
     }
 
     private void setChosenFruit(Excursion fruit) {
