@@ -15,7 +15,7 @@ import java.util.Set;
 public final class UserSession {
 
     private static UserSession instance;
-    private String email;
+    private static String email;
     private String roles;
 
     public UserSession() {
@@ -35,7 +35,7 @@ public final class UserSession {
         return instance;
     }
 
-    public String getEmail() {
+    public static String getEmail() {
         return email;
     }
 

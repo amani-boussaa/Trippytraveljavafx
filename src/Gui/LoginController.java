@@ -19,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import javafx.scene.control.Label;
 
 public class LoginController implements Initializable {
 
@@ -27,6 +28,9 @@ public class LoginController implements Initializable {
 
     @FXML
     private PasswordField tpassword;
+    
+    @FXML
+    private Label loginTest;
 
     @FXML
     void login(MouseEvent event) throws SQLException, IOException {
@@ -36,17 +40,31 @@ public class LoginController implements Initializable {
         Connection connection = MyDB.getInstance().getCon();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("select * from user where email = '"+email+"' and password = '"+password+"' ");
+        
         if (resultSet.next()){
-            Parent root = FXMLLoader.load(getClass().getResource("MainFXML.fxml"));
-            Node node = (Node) event.getSource();
-            Stage stage = (Stage) node.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            System.out.println("login");
-            String roles = this.getUserRole(email);
-            UserSession.getInstace(email, roles);
-            System.out.println(UserSession.getInstace(email, roles));
+            if(this.getUserRole(email).equalsIgnoreCase("ROLE_ADMIN")){
+                Parent root = FXMLLoader.load(getClass().getResource("MainFXML.fxml"));
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                System.out.println("login admin");
+                String roles = this.getUserRole(email);
+                UserSession.getInstace(email, roles);
+                System.out.println(UserSession.getInstace(email, roles));
+            }
+            else{
+                Parent root = FXMLLoader.load(getClass().getResource("Activation.fxml"));
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                System.out.println("login client");
+                String roles = this.getUserRole(email);
+                UserSession.getInstace(email, roles);
+                System.out.println(UserSession.getInstace(email, roles));
+            }
         }
         else{
+            loginTest.setText("email out mot de passe incorrecte");
             System.out.println("error");
         }
     }

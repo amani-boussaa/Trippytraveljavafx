@@ -17,6 +17,7 @@
                     <Label layoutX="114.0" layoutY="78.0" text="User Login" />
                     <Button fx:id="button_sign_up" layoutX="151.0" layoutY="354.0" mnemonicParsing="false" onMouseClicked="#signup" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Sign-Up" textFill="#0598ff" />
                     <TextField layoutX="54.0" layoutY="354.0" prefHeight="20.0" prefWidth="97.0" style="-fx-background-color: transparent;" text="Not a User ?" />
+                <Label fx:id="loginTest" layoutX="73.0" layoutY="111.0" textFill="#fc0000" />
                 </children>
             </AnchorPane>
         </right>

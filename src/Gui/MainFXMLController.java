@@ -91,6 +91,10 @@ public class MainFXMLController implements Initializable {
     
     @FXML
     void deconnexion(MouseEvent event) throws IOException {
+        String email=null;
+        String roles=null;
+        UserSession.getInstace(email, roles).cleanUserSession();
+        System.out.println(UserSession.getInstace(email, roles));
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
