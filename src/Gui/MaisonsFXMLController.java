@@ -36,19 +36,15 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
-/**
- * FXML Controller class
- *
- * @author amani
- */
-public class MainFXMLController implements Initializable {
-
-    @FXML
+public class MaisonsFXMLController implements Initializable {
+     @FXML
     private Button btnExcursion;
     @FXML
-    private Button bntHotel;
+    private Button btnHotel;
     @FXML
     private Button btnMaison;
+      @FXML
+    private Button btnTypeMaison;
     @FXML
     private Button btnAttraction;
     @FXML
@@ -65,7 +61,7 @@ public class MainFXMLController implements Initializable {
     private FontAwesomeIconView btnClose;
     @FXML
     private TableView<Maisonshotes> MaisonTable;
-      @FXML
+    @FXML
     private TableColumn<Maisonshotes, String> idCol;
     @FXML
     private TableColumn<Maisonshotes, String> capaciteCol;
@@ -89,23 +85,22 @@ public class MainFXMLController implements Initializable {
 
     ObservableList<Maisonshotes> MaisonsList = FXCollections.observableArrayList();
 
-    /**
-     * Initializes the controller class.
-     */
+    
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        showAll();
+    public void initialize(URL location, ResourceBundle resources) {
+   showAll();
     }
-
     @FXML
     public void handleclicks(ActionEvent event) {
         if (event.getSource() == btnExcursion) {
             lblstatus.setText("Excursions");
-        } else if (event.getSource() == bntHotel) {
+        } else if (event.getSource() == btnHotel) {
             lblstatus.setText("Hotels");
         } else if (event.getSource() == btnMaison) {
             lblstatus.setText("Maisons d'hote");
+        }else if (event.getSource() == btnTypeMaison) {
+            lblstatus.setText("type Maison");
+            
         } else if (event.getSource() == btnAttraction) {
             lblstatus.setText("Attraction");
         } else if (event.getSource() == btnBlog) {
@@ -117,7 +112,7 @@ public class MainFXMLController implements Initializable {
         }
     }
 
-    @FXML
+     @FXML
     private void handleClose(MouseEvent event) {
         if (event.getSource() == btnClose) {
              // get a handle to the stage
@@ -126,35 +121,34 @@ public class MainFXMLController implements Initializable {
             stage.close();
         }
     }
-
     @FXML
-    private void getAddview(MouseEvent event) {
-        try {
+  private void getAddview(MouseEvent event) {
+       try {
             Parent parent;
             parent = FXMLLoader.load(getClass().getResource("/Gui/MaisonsAddFXML.fxml"));
             Scene scene = new Scene(parent);
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.setTitle("Ajouter excursion");
+            stage.setTitle("Ajouter maison");
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
+     
 
     }
-
-    @FXML
+   @FXML
     private void refreshTable() {
         MaisonsList.clear();
         MaisonshotesService ps = new MaisonshotesService();
         ObservableList<Maisonshotes> MaisonsList = ps.getMaisonsList();
         MaisonTable.setItems(MaisonsList);
     }
-
-
     public void showAll() {
         MaisonshotesService ps = new MaisonshotesService();
+       
         ObservableList<Maisonshotes> MaisonsList = ps.getMaisonsList();
+        System.out.println(MaisonsList);
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         capaciteCol.setCellValueFactory(new PropertyValueFactory<>("capacite"));
         nbrChambresCol.setCellValueFactory(new PropertyValueFactory<>("nbrChambres"));
@@ -164,7 +158,8 @@ public class MainFXMLController implements Initializable {
         proprietaireCol.setCellValueFactory(new PropertyValueFactory<>("proprietaire"));
         prixCol.setCellValueFactory(new PropertyValueFactory<>("prix"));
         //excursionTable.setItems(ExcursionList);
-        //add cell of button edit 
+        
+    //add cell of button edit 
         Callback<TableColumn<Maisonshotes, String>, TableCell<Maisonshotes, String>> cellFoctory = (TableColumn<Maisonshotes, String> param) -> {
             // make cell containing buttons
             final TableCell<Maisonshotes, String> cell = new TableCell<Maisonshotes, String>() {
@@ -200,13 +195,14 @@ public class MainFXMLController implements Initializable {
 
                             maisonshotes = MaisonTable.getSelectionModel().getSelectedItem();
                             FXMLLoader loader = new FXMLLoader();
-                            loader.setLocation(getClass().getResource("/Gui/MaisonsUpdateFXML.fxml"));
+                            loader.setLocation(getClass().getResource("/Gui/MaisonsAddFXML.fxml"));
                             try {
                                 loader.load();
                             } catch (IOException ex) {
                                 Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                             }
- MaisonsUpdateFXMLController updateMaisonsController = loader.getController();
+
+                            MaisonsUpdateFXMLController updateMaisonsController = loader.getController();
                             updateMaisonsController.setTextField(maisonshotes.getId(), maisonshotes.getCapacite(),
                                     maisonshotes.getNbrChambres(),
                                     maisonshotes.getTypeMaison_id(), maisonshotes.getLibelle(), maisonshotes.getLocalisation(), maisonshotes.getProprietaire(),
@@ -238,4 +234,7 @@ public class MainFXMLController implements Initializable {
         editCol.setCellFactory(cellFoctory);
         MaisonTable.setItems(MaisonsList);
     }
+
+   
+  
 }

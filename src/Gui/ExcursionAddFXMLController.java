@@ -67,7 +67,7 @@ public class ExcursionAddFXMLController implements Initializable {
     @FXML
     private void insert(MouseEvent event) {
         String lib = libFld.getText();
-        String cat = catCombo.getSelectionModel().getSelectedItem().toString();
+        String cat = catCombo.getSelectionModel().getSelectedItem();
         String prix = prixFld.getText();
         String desc = descriptionFld.getText();
         String prog = progFld.getText();

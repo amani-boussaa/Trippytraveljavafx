@@ -63,21 +63,32 @@ public class ExcursionFXMLController implements Initializable {
     private Pane pnlStatus;
     @FXML
     private FontAwesomeIconView btnClose;
-    @FXML
     private TableView<Excursion> excursionTable;
     @FXML
     private TableColumn<Excursion, String> idCol;
-    @FXML
     private TableColumn<Excursion, String> libCol;
     
     @FXML
     private TableColumn<Excursion, String> prixCol;
-    @FXML
     private TableColumn<Excursion, String> editCol;
 
     Excursion excursion = null;
 
     ObservableList<Excursion> ExcursionList = FXCollections.observableArrayList();
+    @FXML
+    private TableView<?> MaisonTable;
+    @FXML
+    private TableColumn<?, ?> capaciteCol;
+    @FXML
+    private TableColumn<?, ?> nbrChambresCol;
+    @FXML
+    private TableColumn<?, ?> typeMaison_idCol;
+    @FXML
+    private TableColumn<?, ?> libelleCol;
+    @FXML
+    private TableColumn<?, ?> LocalisationCol;
+    @FXML
+    private TableColumn<?, ?> proprietaireCol;
 
     /**
      * Initializes the controller class.
