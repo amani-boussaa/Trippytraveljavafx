@@ -5,12 +5,17 @@
  */
 package Gui;
 
+import Entities.Chartexcursion;
 import Entities.Excursion;
+import Entities.Excursioncategorie;
 import Services.ExcursionService;
+import Services.ExcursioncategorieService;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,6 +43,14 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
+
+/**
+ * jfreechart library*
+ */
+import org.jfree.chart.ChartFactory;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.chart.fx.ChartViewer;
+import org.jfree.chart.JFreeChart;
 
 /**
  * FXML Controller class
@@ -79,6 +92,7 @@ public class ExcursionFXMLController implements Initializable {
     private TableColumn<Excursion, String> editCol;
 
     Excursion excursion = null;
+    Excursioncategorie excursioncat = null;
 
     ObservableList<Excursion> ExcursionList = FXCollections.observableArrayList();
     @FXML
@@ -262,5 +276,38 @@ public class ExcursionFXMLController implements Initializable {
         //Apply filtered and sorted data to the table view
         excursionTable.setItems(sortedData);
 
+    }
+
+    @FXML
+    private void chart(MouseEvent event) throws SQLException {
+        ExcursionService ps = new ExcursionService();
+        ObservableList<Chartexcursion> chartList = ps.chartcategorie();
+
+        
+        Stage stage = new Stage();
+        DefaultPieDataset data = new DefaultPieDataset();
+        /*data.setValue("Category 1", 43.2);
+        data.setValue("Category 2", 27.9);
+        data.setValue("Category 3", 79.5);*/
+        for (Chartexcursion tab : chartList) {
+             ExcursioncategorieService cs = new ExcursioncategorieService();
+            excursioncat = cs.findById(tab.getExcursioncategorie_id());
+            data.setValue(excursioncat.getLibelle(), tab.getCount());
+        }
+// create a chart...
+        JFreeChart chart = ChartFactory.createPieChart(
+                "Pie Chart-Excursion catégories",
+                data,
+                true, // legend?
+                true, // tooltips?
+                false // URLs?
+        );
+// create and display a scene...
+        ChartViewer viewer = new ChartViewer(chart);
+        stage.setScene(new Scene(viewer));
+        stage.setTitle("JFreeChart: Excursion catégorie");
+        stage.setWidth(700);
+        stage.setHeight(390);
+        stage.show();
     }
 }

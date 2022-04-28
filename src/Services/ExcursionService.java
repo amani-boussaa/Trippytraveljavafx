@@ -1,5 +1,6 @@
 package Services;
 
+import Entities.Chartexcursion;
 import Entities.Excursion;
 import Entities.Excursioncategorie;
 import Utils.MyDB;
@@ -64,13 +65,13 @@ public class ExcursionService implements IService<Excursion> {
     }*/
     @Override
     public List<Excursion> afficher() throws SQLException {
-        List<Excursion> list =new ArrayList<>();
+        List<Excursion> list = new ArrayList<>();
         try {
             String req = "select * from excursion";
             Statement st = con.createStatement();
-            ResultSet rs =st.executeQuery(req);
-             
-            while(rs.next()){
+            ResultSet rs = st.executeQuery(req);
+
+            while (rs.next()) {
                 Excursion p = new Excursion();
                 p.setId(rs.getInt("id"));
                 p.setLibelle(rs.getString("libelle"));
@@ -79,11 +80,11 @@ public class ExcursionService implements IService<Excursion> {
                 p.setColor("6A7324");
                 list.add(p);
             }
-           
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-       
+
         return list;
     }
 
@@ -95,8 +96,8 @@ public class ExcursionService implements IService<Excursion> {
             ResultSet rst = stm.executeQuery(req);
             System.out.println(rst.toString());
             while (rst.next()) {
-                Excursion p = new Excursion(rst.getInt("id"),rst.getInt("excursioncategorie_id"), rst.getString("libelle"), rst.getString("description"), rst.getString("programme"), rst.getString("ville"), rst.getString("prix"), rst.getString("duration"), rst.getString("localisation"));
-              
+                Excursion p = new Excursion(rst.getInt("id"), rst.getInt("excursioncategorie_id"), rst.getString("libelle"), rst.getString("description"), rst.getString("programme"), rst.getString("ville"), rst.getString("prix"), rst.getString("duration"), rst.getString("localisation"));
+
                 Excursions.add(p);
 
             }
@@ -107,8 +108,6 @@ public class ExcursionService implements IService<Excursion> {
         return Excursions;
 
     }
-
-  
 
     public void supprimer(int id) {
         try {
@@ -154,4 +153,59 @@ public class ExcursionService implements IService<Excursion> {
         }
     }
 
+   /* public List chartcategorie() throws SQLException {
+        // List<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
+        // Creating a 2D ArrayList of Integer type
+        ArrayList<ArrayList<Integer>> list
+                = new ArrayList<ArrayList<Integer>>();
+
+        try {
+            String req = "SELECT excursioncategorie_id, COUNT(*) as count FROM excursion GROUP BY excursioncategorie_id";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            Integer i = 0;
+            while (rs.next()) {
+
+                // One space allocated for R0
+                //list.add(new ArrayList<Integer>());
+
+                // Adding 3 to R0 created above x(R0, C0)
+                //  list.get(i).add(rs.getInt("excursioncategorie_id"), rs.getInt("count"));
+                // Adding 3 to R0 created above x(R0, C0)
+                Integer cat = rs.getInt("excursioncategorie_id");
+                Integer count = rs.getInt("count");
+                System.out.println(cat);
+                System.out.println(count);
+
+                list.get(0).add(cat, count);
+                i += 1;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return list;
+    }*/
+     public ObservableList<Chartexcursion> chartcategorie() {
+        ObservableList<Chartexcursion> Excursions = FXCollections.observableArrayList();
+        String req = "SELECT excursioncategorie_id, COUNT(*) as count FROM excursion GROUP BY excursioncategorie_id";
+        try {
+            stm = con.createStatement();
+            ResultSet rst = stm.executeQuery(req);
+            System.out.println(rst.toString());
+            while (rst.next()) {
+                Chartexcursion p = new Chartexcursion(rst.getInt("excursioncategorie_id"), rst.getInt("count"));
+
+                Excursions.add(p);
+
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        System.out.println(Excursions);
+        return Excursions;
+
+    }
+     
 }

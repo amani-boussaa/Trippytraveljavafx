@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -165,6 +164,11 @@
                   <Button graphicTextGap="15.0" mnemonicParsing="false" onMouseClicked="#refreshTable" prefHeight="25.0" prefWidth="33.0" stylesheets="@../css/stylel.css">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" size="15" text="" />
+                     </graphic>
+                  </Button>
+                  <Button graphicTextGap="15.0" mnemonicParsing="false" onMouseClicked="#refreshTable" prefHeight="25.0" prefWidth="33.0" stylesheets="@../css/stylel.css">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="PIE_CHART" onMouseClicked="#chart" size="15" />
                      </graphic>
                   </Button>
                </children>
