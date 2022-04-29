@@ -4,11 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Trippytraveljavafx/src/Gui/SignUpController.java</file>
-            <file>file:/C:/Trippytraveljavafx/src/Gui/Activation.fxml</file>
+            <file>file:/C:/Trippytraveljavafx/src/Security/BCrypt.java</file>
             <file>file:/C:/Trippytraveljavafx/src/Gui/LoginController.java</file>
+            <file>file:/C:/Trippytraveljavafx/src/Gui/NewPasswordController.java</file>
             <file>file:/C:/Trippytraveljavafx/src/Gui/ActivationCode.java</file>
+            <file>file:/C:/Trippytraveljavafx/src/Gui/RecuperationController.java</file>
             <file>file:/C:/Trippytraveljavafx/src/Gui/UserSession.java</file>
-            <file>file:/C:/Trippytraveljavafx/src/Gui/ReclamationController.java</file>
             <file>file:/C:/Trippytraveljavafx/src/Gui/ActivationController.java</file>
         </group>
     </open-files>
