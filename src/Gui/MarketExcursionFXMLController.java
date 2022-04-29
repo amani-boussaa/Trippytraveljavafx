@@ -74,6 +74,8 @@ public class MarketExcursionFXMLController implements Initializable {
     private TextField id_selected_excursion;
     @FXML
     private Rating ratingdefault;
+    @FXML
+    private TextField keywordTextField;
 
     private List<Excursion> getData() {
         List<Excursion> fruits = new ArrayList<>();

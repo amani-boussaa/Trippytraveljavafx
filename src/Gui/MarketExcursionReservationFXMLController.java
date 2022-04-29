@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -93,6 +95,7 @@ public class MarketExcursionReservationFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
          fruits.addAll(getData());
+         
          if (fruits.size() > 0) {
               ExcursionService es = new ExcursionService();
             setChosenFruit(es.findById(fruits.get(0).getExcursion_id()));
