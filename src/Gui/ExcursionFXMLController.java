@@ -103,6 +103,8 @@ public class ExcursionFXMLController implements Initializable {
     ObservableList<Excursion> ExcursionList = FXCollections.observableArrayList();
     @FXML
     private TextField keywordTextField;
+    @FXML
+    private Button btnExcursioncat1;
 
     /**
      * Initializes the controller class.
@@ -117,7 +119,19 @@ public class ExcursionFXMLController implements Initializable {
     public void handleclicks(ActionEvent event) {
         if (event.getSource() == btnExcursion) {
             lblstatus.setText("Excursions");
-        } else if (event.getSource() == bntHotel) {
+        }else if (event.getSource() == btnExcursioncat1) {
+            try {
+            Parent parent;
+            parent = FXMLLoader.load(getClass().getResource("/Gui/ExcursionCategorieFXML.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Excursion catégorie");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }  else if (event.getSource() == bntHotel) {
             lblstatus.setText("Hotels");
         } else if (event.getSource() == btnMaison) {
             lblstatus.setText("Maisons d'hote");
