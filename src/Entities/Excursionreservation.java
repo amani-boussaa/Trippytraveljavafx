@@ -7,6 +7,15 @@ public class Excursionreservation {
     public Excursionreservation() {
     }
 
+    public Excursionreservation(int excursion_id, int user_id, String prix, String status) {
+        this.excursion_id = excursion_id;
+        this.user_id = user_id;
+        this.prix = prix;
+        this.status = status;
+    }
+
+  
+
     public Excursionreservation(int excursion_id, int user_id, String prix, String status, String created_at, String start, String end, String pi) {
         this.excursion_id = excursion_id;
         this.user_id = user_id;

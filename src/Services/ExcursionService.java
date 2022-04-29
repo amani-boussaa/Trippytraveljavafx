@@ -153,41 +153,7 @@ public class ExcursionService implements IService<Excursion> {
         }
     }
 
-   /* public List chartcategorie() throws SQLException {
-        // List<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
-        // Creating a 2D ArrayList of Integer type
-        ArrayList<ArrayList<Integer>> list
-                = new ArrayList<ArrayList<Integer>>();
-
-        try {
-            String req = "SELECT excursioncategorie_id, COUNT(*) as count FROM excursion GROUP BY excursioncategorie_id";
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(req);
-            Integer i = 0;
-            while (rs.next()) {
-
-                // One space allocated for R0
-                //list.add(new ArrayList<Integer>());
-
-                // Adding 3 to R0 created above x(R0, C0)
-                //  list.get(i).add(rs.getInt("excursioncategorie_id"), rs.getInt("count"));
-                // Adding 3 to R0 created above x(R0, C0)
-                Integer cat = rs.getInt("excursioncategorie_id");
-                Integer count = rs.getInt("count");
-                System.out.println(cat);
-                System.out.println(count);
-
-                list.get(0).add(cat, count);
-                i += 1;
-            }
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        return list;
-    }*/
-     public ObservableList<Chartexcursion> chartcategorie() {
+    public ObservableList<Chartexcursion> chartcategorie() {
         ObservableList<Chartexcursion> Excursions = FXCollections.observableArrayList();
         String req = "SELECT excursioncategorie_id, COUNT(*) as count FROM excursion GROUP BY excursioncategorie_id";
         try {
@@ -207,5 +173,26 @@ public class ExcursionService implements IService<Excursion> {
         return Excursions;
 
     }
-     
+
+    public Excursion findById(Integer id) {
+        Excursion cat = null;
+        String req = "SELECT * FROM `excursion` WHERE `id` = " + id;
+        try {
+            stm = con.createStatement();
+            ResultSet rst = stm.executeQuery(req);
+            System.out.println(rst.toString());
+            if (rst.next()) {
+                cat = new Excursion();
+                cat.setId(rst.getInt("id"));
+                cat.setLibelle(rst.getString("libelle"));
+                cat.setPrix(rst.getString("prix"));
+                cat.setImgSrc("/img/kiwi.png");
+                cat.setColor("6A7324");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return cat;
+    }
+
 }

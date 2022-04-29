@@ -27,12 +27,12 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="110.0" prefWidth="200.0">
                      <children>
-                        <Label prefHeight="49.0" prefWidth="128.0" text="Fruits" textFill="#878787">
+                        <Label prefHeight="49.0" prefWidth="128.0" text="Trippy" textFill="#878787">
                            <font>
                               <Font name="Cambria Bold" size="40.0" />
                            </font>
                         </Label>
-                        <Label text="Market" textFill="#878787">
+                        <Label text="Travel" textFill="#878787">
                            <font>
                               <Font name="Cambria" size="40.0" />
                            </font>
@@ -100,7 +100,7 @@
                               <Insets top="20.0" />
                            </VBox.margin>
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="270.0" styleClass="add-btn" stylesheets="@../values/style.css" text="Réservez" textFill="#828282">
+                              <Button mnemonicParsing="false" onAction="#reserver" prefHeight="50.0" prefWidth="270.0" styleClass="add-btn" stylesheets="@../values/style.css" text="Réservez" textFill="#828282">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
@@ -113,7 +113,7 @@
                            </VBox.margin>
                            <children>
                               <Separator prefHeight="0.0" prefWidth="118.0" />
-                              <Label alignment="CENTER" prefHeight="45.0" prefWidth="64.0" text="or" textFill="WHITE">
+                              <Label alignment="CENTER" prefHeight="45.0" prefWidth="64.0" text="ou" textFill="WHITE">
                                  <font>
                                     <Font name="Cambria" size="24.0" />
                                  </font>
@@ -132,7 +132,7 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
                            <children>
-                              <TextField fx:id="id_selected_excursion" />
+                              <TextField fx:id="id_selected_excursion" opacity="0.0" />
                            </children>
                         </HBox>
                      </children>
@@ -158,13 +158,13 @@
                               <Font name="Cambria Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="29.0" prefWidth="77.0" text="English" textFill="#878787" underline="true">
+                        <Label prefHeight="29.0" prefWidth="77.0" text="Français" textFill="#878787" underline="true">
                            <font>
                               <Font name="Cambria" size="18.0" />
                            </font>
                         </Label>
                         <Pane prefHeight="65.0" prefWidth="393.0" HBox.hgrow="ALWAYS" />
-                        <Label prefHeight="62.0" prefWidth="100.0" text="My Account" textFill="#878787">
+                        <Label onMouseClicked="#mesreservation" prefHeight="62.0" prefWidth="132.0" text="Mes réservation" textFill="#878787">
                            <font>
                               <Font name="Cambria" size="18.0" />
                            </font>
