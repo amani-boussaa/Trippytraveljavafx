@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -24,7 +25,7 @@
          <children>
             <Pane prefHeight="105.0" prefWidth="266.0" style="-fx-background-color: #fbfbfb;">
                <children>
-                  <ImageView fitHeight="105.0" fitWidth="266.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="105.0" fitWidth="266.0" layoutX="72.0" onMouseClicked="#showMarket" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Images/logo.png" />
                      </image>

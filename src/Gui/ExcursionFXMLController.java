@@ -335,4 +335,19 @@ public class ExcursionFXMLController implements Initializable {
         stage.setHeight(390);
         stage.show();
     }
+
+    @FXML
+    private void showMarket(MouseEvent event) {
+        try {
+            Parent parent;
+            parent = FXMLLoader.load(getClass().getResource("/Gui/MarketExcursionFXML.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Market excursion");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

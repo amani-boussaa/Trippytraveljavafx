@@ -20,6 +20,8 @@ import javafx.scene.layout.VBox;
 import trippytraveljava.Main;
 import trippytraveljava.MyListener;
 import Entities.Excursion;
+import Entities.Excursionrating;
+import Services.ExcursionRatingService;
 import Services.ExcursionService;
 
 import java.io.IOException;
@@ -30,13 +32,21 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import org.controlsfx.control.Rating;
+
 /**
  * FXML Controller class
  *
  * @author amani
  */
 public class MarketExcursionFXMLController implements Initializable {
-
+    
     @FXML
     private VBox chosenFruitCard;
     @FXML
@@ -49,106 +59,54 @@ public class MarketExcursionFXMLController implements Initializable {
     private ScrollPane scroll;
     @FXML
     private GridPane grid;
-
+    
+    Excursionrating excursionrating = null;
     /**
      * Initializes the controller class.
      */
     private List<Excursion> fruits = new ArrayList<>();
     private Image image;
     private MyListener myListener;
-
+    @FXML
+    private TextField id_selected_excursion;
+    @FXML
+    private Rating ratingdefault;
+    
     private List<Excursion> getData() {
         List<Excursion> fruits = new ArrayList<>();
         Excursion fruit;
-          ExcursionService prodService = new ExcursionService();
+        ExcursionService prodService = new ExcursionService();
         try {
             fruits.addAll(prodService.afficher());
         } catch (SQLException ex) {
             Logger.getLogger(MarketExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
-return fruits;
-       /* fruit = new Excursion();
-        fruit.setLibelle("Kiwi");
-        fruit.setPrix("2.99");
-        fruit.setImgSrc("/img/kiwi.png");
-        fruit.setColor("6A7324");
-        fruits.add(fruit);
-
-        fruit = new Excursion();
-        fruit.setLibelle("Coconut");
-        fruit.setPrix("3.99");
-        fruit.setImgSrc("/img/coconut.png");
-        fruit.setColor("A7745B");
-        fruits.add(fruit);
-
-        fruit = new Excursion();
-        fruit.setLibelle("Peach");
-        fruit.setPrix("1.50");
-        fruit.setImgSrc("/img/peach.png");
-        fruit.setColor("F16C31");
-        fruits.add(fruit);
-
-        fruit = new Excursion();
-        fruit.setLibelle("Grapes");
-        fruit.setPrix("0.99");
-        fruit.setImgSrc("/img/grapes.png");
-        fruit.setColor("291D36");
-        fruits.add(fruit);
-
-        fruit = new Excursion();
-        fruit.setLibelle("Watermelon");
-        fruit.setPrix("4.99");
-        fruit.setImgSrc("/img/watermelon.png");
-        fruit.setColor("22371D");
-        fruits.add(fruit);
-
-        fruit = new Excursion();
-        fruit.setLibelle("Orange");
-        fruit.setPrix("2.99");
-        fruit.setImgSrc("/img/orange.png");
-        fruit.setColor("FB5D03");
-        fruits.add(fruit);
-
-        fruit = new Excursion();
-        fruit.setLibelle("StrawBerry");
-        fruit.setPrix("0.99");
-        fruit.setImgSrc("/img/strawberry.png");
-        fruit.setColor("80080C");
-        fruits.add(fruit);
-
-        fruit = new Excursion();
-        fruit.setLibelle("Mango");
-        fruit.setPrix("0.99");
-        fruit.setImgSrc("/img/mango.png");
-        fruit.setColor("FFB605");
-        fruits.add(fruit);
-
-        fruit = new Excursion();
-        fruit.setLibelle("Cherry");
-        fruit.setPrix("0.99");
-        fruit.setImgSrc("/img/cherry.png");
-        fruit.setColor("5F060E");
-        fruits.add(fruit);
-
-        fruit = new Excursion();
-        fruit.setLibelle("Banana");
-        fruit.setPrix("1.99");
-        fruit.setImgSrc("/img/banana.png");
-        fruit.setColor("E7C00F");
-        fruits.add(fruit);
-
-        return fruits;*/
+        return fruits;
+        
     }
-
+    
     private void setChosenFruit(Excursion fruit) {
+        id_selected_excursion.setText(String.valueOf(fruit.getId()));
         fruitNameLable.setText(fruit.getLibelle());
         fruitPriceLabel.setText(Main.CURRENCY + fruit.getPrix());
         image = new Image(getClass().getResourceAsStream(fruit.getImgSrc()));
         fruitImg.setImage(image);
-        chosenFruitCard.setStyle("-fx-background-color: #" + fruit.getColor() + ";\n" +
-                "    -fx-background-radius: 30;");
+        chosenFruitCard.setStyle("-fx-background-color: #" + fruit.getColor() + ";\n"
+                + "    -fx-background-radius: 30;");
+        ExcursionRatingService ratingservice = new ExcursionRatingService();
+        excursionrating = ratingservice.findrat(fruit.getId());
+        System.out.println("ll");
+        if(excursionrating!=null){
+            if (excursionrating.getRating() != null) {
+            ratingdefault.setRating(excursionrating.getRating());
+        }
+        }
+       /* if (excursionrating.getRating() != null) {
+            ratingdefault.setRating(excursionrating.getRating());            
+        }*/
+        
     }
-
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         fruits.addAll(getData());
@@ -168,15 +126,15 @@ return fruits;
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/Gui/itemexcursion.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
-
+                
                 ItemExcursionController itemController = fxmlLoader.getController();
-                itemController.setData(fruits.get(i),myListener);
-
+                itemController.setData(fruits.get(i), myListener);
+                
                 if (column == 3) {
                     column = 0;
                     row++;
                 }
-
+                
                 grid.add(anchorPane, column++, row); //(child,column,row)
                 //set grid width
                 grid.setMinWidth(Region.USE_COMPUTED_SIZE);
@@ -187,12 +145,36 @@ return fruits;
                 grid.setMinHeight(Region.USE_COMPUTED_SIZE);
                 grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
                 grid.setMaxHeight(Region.USE_PREF_SIZE);
-
+                
                 GridPane.setMargin(anchorPane, new Insets(10));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }  
+    }
+    
+    @FXML
+    private void showRating(MouseEvent event) {
+        
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/Gui/ExcursionRatingFXML.fxml"));
+        try {
+            loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ExcursionRatingFXMLController ratingExcursionController = loader.getController();
+        ratingExcursionController.setTextField(Integer.valueOf(id_selected_excursion.getText()), Double.valueOf(ratingdefault.getRating()));
+        Parent parent = loader.getRoot();
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Rating excursion");
+        stage.show();
+    }
+    
+    void setTextField(double rating) {
+        ratingdefault.setRating(rating);
+    }
     
 }
