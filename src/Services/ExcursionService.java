@@ -1,5 +1,6 @@
 package Services;
 
+import Entities.Chartexcursion;
 import Entities.Excursion;
 import Entities.Excursioncategorie;
 import Utils.MyDB;
@@ -46,7 +47,7 @@ public class ExcursionService implements IService<Excursion> {
 
     }
 
-    @Override
+    /*@Override
     public List<Excursion> afficher() throws SQLException {
         String req = "Select * from `Excursion`";
         stm = con.createStatement();
@@ -61,6 +62,30 @@ public class ExcursionService implements IService<Excursion> {
         }
         return Excursions;
 
+    }*/
+    @Override
+    public List<Excursion> afficher() throws SQLException {
+        List<Excursion> list = new ArrayList<>();
+        try {
+            String req = "select * from excursion";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(req);
+
+            while (rs.next()) {
+                Excursion p = new Excursion();
+                p.setId(rs.getInt("id"));
+                p.setLibelle(rs.getString("libelle"));
+                p.setPrix(rs.getString("prix"));
+                p.setImgSrc("/img/kiwi.png");
+                p.setColor("6A7324");
+                list.add(p);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return list;
     }
 
     public ObservableList<Excursion> getExcursionList() {
@@ -71,8 +96,8 @@ public class ExcursionService implements IService<Excursion> {
             ResultSet rst = stm.executeQuery(req);
             System.out.println(rst.toString());
             while (rst.next()) {
-                Excursion p = new Excursion(rst.getInt("id"),rst.getInt("excursioncategorie_id"), rst.getString("libelle"), rst.getString("description"), rst.getString("programme"), rst.getString("ville"), rst.getString("prix"), rst.getString("duration"), rst.getString("localisation"));
-              
+                Excursion p = new Excursion(rst.getInt("id"), rst.getInt("excursioncategorie_id"), rst.getString("libelle"), rst.getString("description"), rst.getString("programme"), rst.getString("ville"), rst.getString("prix"), rst.getString("duration"), rst.getString("localisation"));
+
                 Excursions.add(p);
 
             }
@@ -83,8 +108,6 @@ public class ExcursionService implements IService<Excursion> {
         return Excursions;
 
     }
-
-  
 
     public void supprimer(int id) {
         try {
@@ -128,6 +151,48 @@ public class ExcursionService implements IService<Excursion> {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public ObservableList<Chartexcursion> chartcategorie() {
+        ObservableList<Chartexcursion> Excursions = FXCollections.observableArrayList();
+        String req = "SELECT excursioncategorie_id, COUNT(*) as count FROM excursion GROUP BY excursioncategorie_id";
+        try {
+            stm = con.createStatement();
+            ResultSet rst = stm.executeQuery(req);
+            System.out.println(rst.toString());
+            while (rst.next()) {
+                Chartexcursion p = new Chartexcursion(rst.getInt("excursioncategorie_id"), rst.getInt("count"));
+
+                Excursions.add(p);
+
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        System.out.println(Excursions);
+        return Excursions;
+
+    }
+
+    public Excursion findById(Integer id) {
+        Excursion cat = null;
+        String req = "SELECT * FROM `excursion` WHERE `id` = " + id;
+        try {
+            stm = con.createStatement();
+            ResultSet rst = stm.executeQuery(req);
+            System.out.println(rst.toString());
+            if (rst.next()) {
+                cat = new Excursion();
+                cat.setId(rst.getInt("id"));
+                cat.setLibelle(rst.getString("libelle"));
+                cat.setPrix(rst.getString("prix"));
+                cat.setImgSrc("/img/kiwi.png");
+                cat.setColor("6A7324");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return cat;
     }
 
 }

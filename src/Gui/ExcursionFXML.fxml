@@ -25,7 +25,7 @@
          <children>
             <Pane prefHeight="105.0" prefWidth="266.0" style="-fx-background-color: #fbfbfb;">
                <children>
-                  <ImageView fitHeight="105.0" fitWidth="266.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="105.0" fitWidth="266.0" layoutX="72.0" onMouseClicked="#showMarket" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Images/logo.png" />
                      </image>
@@ -33,6 +33,17 @@
                </children>
             </Pane>
             <Button fx:id="btnExcursion" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleclicks" prefHeight="47.0" prefWidth="269.0" styleClass="sidebaritem" stylesheets="@../css/stylel.css" text="Excursions" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="MAP" size="15" />
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnExcursioncat1" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleclicks" prefHeight="47.0" prefWidth="269.0" styleClass="sidebaritem" stylesheets="@../css/stylel.css" text="Excursion Catégorie" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="MAP" size="15" />
                </graphic>
@@ -148,7 +159,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </FontAwesomeIconView>
-                  <TextField prefHeight="25.0" prefWidth="249.0" />
+                  <TextField fx:id="keywordTextField" prefHeight="25.0" prefWidth="249.0" />
                   <ComboBox prefHeight="27.0" prefWidth="181.0" style="-fx-background-color: white; -fx-border-color: #146886;">
                      <opaqueInsets>
                         <Insets />
@@ -165,6 +176,11 @@
                   <Button graphicTextGap="15.0" mnemonicParsing="false" onMouseClicked="#refreshTable" prefHeight="25.0" prefWidth="33.0" stylesheets="@../css/stylel.css">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" size="15" text="" />
+                     </graphic>
+                  </Button>
+                  <Button graphicTextGap="15.0" mnemonicParsing="false" onMouseClicked="#refreshTable" prefHeight="25.0" prefWidth="33.0" stylesheets="@../css/stylel.css">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="PIE_CHART" onMouseClicked="#chart" size="15" />
                      </graphic>
                   </Button>
                </children>

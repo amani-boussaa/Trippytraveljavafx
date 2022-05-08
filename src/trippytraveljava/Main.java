@@ -20,7 +20,7 @@ public class Main extends Application{
 
     Stage stage;
     Parent parent;
-    
+    public static final String CURRENCY = "$";
     @Override
     public void start(Stage primaryStage) {
         this.stage= primaryStage;
@@ -35,6 +35,7 @@ public class Main extends Application{
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+        
     }
     /**
      * @param args the command line arguments

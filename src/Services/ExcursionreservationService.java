@@ -26,23 +26,19 @@ public class ExcursionreservationService implements IService<Excursionreservatio
 
     @Override
     public void ajouterr(Excursionreservation t) throws SQLException {
-        String req = "INSERT INTO `excursionreservation`(`excursion_id`, `user_id`, `prix`, `status`, `created_at`, `start`, `end`, `pi`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        String req = "INSERT INTO `excursionreservation`(`excursion_id`, `user_id`, `prix`, `status`) VALUES (?,?,?,?)";
         PreparedStatement pstm = con.prepareStatement(req);
         pstm.setInt(1, t.getExcursion_id());
         pstm.setInt(2, t.getUser_id());
         pstm.setString(3, t.getPrix());
         pstm.setString(4, t.getStatus());
-        pstm.setString(5, t.getCreated_at());
-        pstm.setString(6, t.getStart());
-        pstm.setString(7, t.getEnd());
-        pstm.setString(8, t.getPi());
         pstm.executeUpdate();
 
     }
 
     @Override
     public List<Excursionreservation> afficher() throws SQLException {
-        String req = "Select * from `Excursionreservation`";
+        String req = "Select * from `Excursionreservation` where user_id = 1";
         stm = con.createStatement();
         ResultSet rst = stm.executeQuery(req);
         System.out.println(rst.toString());
