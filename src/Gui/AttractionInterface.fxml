@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="617.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.AttractionInterfaceController">
+   <children>
+      <AnchorPane id="AnchorPane" layoutX="20.0" layoutY="111.0" prefHeight="461.0" prefWidth="644.0">
+         <children>
+            <AnchorPane id="AnchorPane" layoutX="-14.0" prefHeight="421.0" prefWidth="655.0" style="-fx-background-color: #222831;">
+               <children>
+                  <TextField fx:id="libelleA" layoutX="22.0" layoutY="38.0" prefHeight="25.0" prefWidth="141.0" />
+                  <TextField fx:id="localisationA" layoutX="24.0" layoutY="121.0" prefHeight="25.0" prefWidth="141.0" />
+                  <TextField fx:id="horraireA" layoutX="22.0" layoutY="199.0" prefHeight="25.0" prefWidth="141.0" />
+                  <Button fx:id="ajoutA" layoutX="44.0" layoutY="342.0" mnemonicParsing="false" onAction="#inscrire" onMousePressed="#onsave" prefHeight="25.0" prefWidth="102.0" text="Ajouter" />
+                  <TextField fx:id="prixA" layoutX="24.0" layoutY="283.0" prefHeight="25.0" prefWidth="141.0" />
+                  <Button fx:id="modA" layoutX="44.0" layoutY="386.0" mnemonicParsing="false" onAction="#modifier" onMousePressed="#onsave" prefHeight="25.0" prefWidth="102.0" text="Modifier" />
+                  <Button fx:id="supA" layoutX="44.0" layoutY="427.0" mnemonicParsing="false" onAction="#supprimer" onMousePressed="#onsave" prefHeight="25.0" prefWidth="102.0" text="Supprimer" />
+                  <TableView fx:id="ListA" layoutX="198.0" layoutY="72.0" prefHeight="460.0" prefWidth="532.0">
+                     <columns>
+                        <TableColumn id="partic" fx:id="lA" prefWidth="178.0" text="Libelle" />
+                        <TableColumn fx:id="localA" prefWidth="138.0" text="Localisation" />
+                        <TableColumn fx:id="hA" prefWidth="112.0" text="Horraire" />
+                        <TableColumn fx:id="pA" prefWidth="79.0" text="Prix" />
+                     </columns>
+                  </TableView>
+                  <Label layoutX="26.0" layoutY="14.0" text="Libelle :" textFill="WHITE" />
+                  <Label layoutX="22.0" layoutY="87.0" text="Localisation :" textFill="WHITE" />
+                  <Label layoutX="25.0" layoutY="254.0" text="Prix :" textFill="WHITE" />
+                  <Label layoutX="23.0" layoutY="169.0" text="Horraire" textFill="WHITE" />
+                  <Label fx:id="erreurlib" layoutX="20.0" layoutY="69.0" prefHeight="21.0" prefWidth="184.0" textFill="RED" />
+                  <Label fx:id="erreurlocal" layoutX="20.0" layoutY="152.0" prefHeight="21.0" prefWidth="191.0" textFill="RED" />
+                  <Label fx:id="erreurho" layoutX="20.0" layoutY="236.0" prefHeight="21.0" prefWidth="191.0" textFill="RED" />
+                  <Label fx:id="erreurp" layoutX="20.0" layoutY="314.0" prefHeight="21.0" prefWidth="191.0" textFill="RED" />
+                  <TextField fx:id="rechercherC" layoutX="335.0" layoutY="20.0" onAction="#cherche" prefHeight="31.0" prefWidth="201.0" />
+                  <Label layoutX="231.0" layoutY="22.0" prefHeight="26.0" prefWidth="94.0" text="Rechercher :" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="modifier_H1" layoutX="582.0" layoutY="20.0" mnemonicParsing="false" onAction="#stat" onMousePressed="#onsave" prefHeight="25.0" prefWidth="102.0" text="Statistiques" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <Pane fx:id="pnlStatus" layoutX="204.0" layoutY="5.0" prefHeight="102.0" prefWidth="532.0" style="-fx-background-color: #222831;">
+         <children>
+            <Label fx:id="lblstatus" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="20.0" layoutY="27.0" text="Attractions" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutY="8.0" prefHeight="102.0" prefWidth="201.0" style="-fx-background-color: #fbfbfb;">
+         <children>
+            <ImageView fitHeight="105.0" fitWidth="266.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
