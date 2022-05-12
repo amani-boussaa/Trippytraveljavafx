@@ -25,6 +25,13 @@ import Entities.Excursionreservation;
 import Services.ExcursionRatingService;
 import Services.ExcursionService;
 import Services.ExcursionreservationService;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,12 +41,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
 
@@ -48,7 +58,7 @@ import org.controlsfx.control.Rating;
  *
  * @author amani
  */
-public class MarketExcursionFXMLController implements Initializable {
+public class MarketExcursionFXMLController implements Initializable  {
 
     @FXML
     private VBox chosenFruitCard;
@@ -76,7 +86,7 @@ public class MarketExcursionFXMLController implements Initializable {
     private Rating ratingdefault;
     @FXML
     private TextField keywordTextField;
-
+HostServices hostServices ;
     private List<Excursion> getData() {
         List<Excursion> fruits = new ArrayList<>();
         Excursion fruit;
@@ -117,6 +127,11 @@ public class MarketExcursionFXMLController implements Initializable {
                 @Override
                 public void onClickListener(Excursion fruit) {
                     setChosenFruit(fruit);
+                }
+
+                @Override
+                public void onClickReservationListener(Excursion excursion, Excursionreservation reservation) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 }
             };
         }
@@ -188,6 +203,9 @@ public class MarketExcursionFXMLController implements Initializable {
             alert2.setHeaderText(null);
             alert2.setContentText("Réservé avec succés !");
             alert2.showAndWait();
+            
+          
+           
         } catch (SQLException ex) {
             Logger.getLogger(MarketExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -207,5 +225,7 @@ public class MarketExcursionFXMLController implements Initializable {
             Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+ 
 
 }
