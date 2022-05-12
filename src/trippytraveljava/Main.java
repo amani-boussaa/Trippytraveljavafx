@@ -35,7 +35,7 @@ public class Main extends Application{
     public void start(Stage primaryStage) {
         this.stage= primaryStage;
         try {
-            parent = FXMLLoader.load(getClass().getResource("/Gui/AttractionInterface.fxml"));
+            parent = FXMLLoader.load(getClass().getResource("/Gui/MaisonsFXML.fxml"));
             Scene scene= new Scene(parent);
             stage.setScene(scene);
             stage.setTitle("Trippy travel");
