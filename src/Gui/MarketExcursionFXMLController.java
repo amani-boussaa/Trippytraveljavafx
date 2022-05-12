@@ -87,6 +87,8 @@ public class MarketExcursionFXMLController implements Initializable  {
     @FXML
     private TextField keywordTextField;
 HostServices hostServices ;
+    @FXML
+    private TextField prix_excursion;
     private List<Excursion> getData() {
         List<Excursion> fruits = new ArrayList<>();
         Excursion fruit;
@@ -102,6 +104,7 @@ HostServices hostServices ;
 
     private void setChosenFruit(Excursion fruit) {
         id_selected_excursion.setText(String.valueOf(fruit.getId()));
+        prix_excursion.setText(String.valueOf(fruit.getPrix()));
         fruitNameLable.setText(fruit.getLibelle());
         fruitPriceLabel.setText(Main.CURRENCY + fruit.getPrix());
         image = new Image(getClass().getResourceAsStream(fruit.getImgSrc()));
@@ -197,7 +200,7 @@ HostServices hostServices ;
     private void reserver(ActionEvent event) {
         try {
             ExcursionreservationService rervationService = new ExcursionreservationService();
-            Excursionreservation t = new Excursionreservation(Integer.valueOf(id_selected_excursion.getText()), 1, "200", "non payé");
+            Excursionreservation t = new Excursionreservation(Integer.valueOf(id_selected_excursion.getText()), 1, prix_excursion.getText(), "non payé");
             rervationService.ajouterr(t);
             Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
             alert2.setHeaderText(null);
