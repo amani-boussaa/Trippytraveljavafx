@@ -25,6 +25,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -35,6 +37,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
 import trippytraveljava.Main;
 import trippytraveljava.MyListener;
@@ -54,8 +57,6 @@ public class MarketExcursionReservationFXMLController implements Initializable {
     @FXML
     private Label fruitPriceLabel;
     @FXML
-    private Rating ratingdefault;
-    @FXML
     private ImageView fruitImg;
     @FXML
     private TextField id_selected_excursion;
@@ -64,6 +65,8 @@ public class MarketExcursionReservationFXMLController implements Initializable {
     @FXML
     private GridPane grid;
     private Image image;
+    @FXML
+    private TextField id_selected_reservation;
     
     private List<Excursionreservation> getData() {
         List<Excursionreservation> fruits = new ArrayList<>();
@@ -77,16 +80,20 @@ public class MarketExcursionReservationFXMLController implements Initializable {
         return fruits;
 
     }
-     private void setChosenFruit(Excursion fruit) {
+     private void setChosenFruit(Excursion fruit,Excursionreservation excursionreservation) {
+        id_selected_reservation.setText(String.valueOf(excursionreservation.getId()));
         id_selected_excursion.setText(String.valueOf(fruit.getId()));
         fruitNameLable.setText(fruit.getLibelle());
-        fruitPriceLabel.setText(Main.CURRENCY + fruit.getPrix());
+        fruitPriceLabel.setText(Main.CURRENCY + excursionreservation.getPrix());
         image = new Image(getClass().getResourceAsStream(fruit.getImgSrc()));
         fruitImg.setImage(image);
         chosenFruitCard.setStyle("-fx-background-color: #" + fruit.getColor() + ";\n"
                 + "    -fx-background-radius: 30;");
        
        
+    }
+      private void setChosenExcursion(Excursion fruit) {
+          System.out.println("ok");
     }
 
     /**
@@ -98,12 +105,18 @@ public class MarketExcursionReservationFXMLController implements Initializable {
          
          if (fruits.size() > 0) {
               ExcursionService es = new ExcursionService();
-            setChosenFruit(es.findById(fruits.get(0).getExcursion_id()));
+              ExcursionreservationService res = new ExcursionreservationService();
+            setChosenFruit(es.findById(fruits.get(0).getExcursion_id()),res.findById(fruits.get(0).getId()));
             myListener = new MyListener() {
                 @Override
-                public void onClickListener(Excursion fruit) {
-                    setChosenFruit(fruit);
+                public void onClickReservationListener(Excursion fruit,Excursionreservation excursionreservation) {
+                    setChosenFruit(fruit,excursionreservation);
                 }
+
+                  @Override
+                  public void onClickListener(Excursion excursion) {
+                      setChosenExcursion(excursion);
+                  }
             };
         }
          int column = 0;
@@ -144,12 +157,28 @@ public class MarketExcursionReservationFXMLController implements Initializable {
     private void reserver(ActionEvent event) {
     }
 
-    @FXML
-    private void showRating(MouseEvent event) {
-    }
 
     @FXML
     private void mesreservation(MouseEvent event) {
+    }
+
+    @FXML
+    private void show_payment_form(MouseEvent event) {
+         FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/Gui/ExcursionStripeFXML.fxml"));
+        try {
+            loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ExcursionStripeFXMLController stripeExcursionController = loader.getController();
+        stripeExcursionController.setTextField(Integer.valueOf(id_selected_excursion.getText()),Integer.valueOf(id_selected_reservation.getText()));
+        Parent parent = loader.getRoot();
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Paiement stripe excursion");
+        stage.show();
     }
     
 }

@@ -110,4 +110,10 @@ public class Excursionreservation {
     public void setPi(String pi) {
         this.pi = pi;
     }
+
+    @Override
+    public String toString() {
+        return "Excursionreservation{" + "id=" + id + ", excursion_id=" + excursion_id + ", user_id=" + user_id + ", prix=" + prix + ", status=" + status + ", created_at=" + created_at + ", start=" + start + ", end=" + end + ", pi=" + pi + '}';
+    }
+    
 }

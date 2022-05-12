@@ -99,4 +99,28 @@ public class ExcursionreservationService implements IService<Excursionreservatio
             System.out.println(ex.getMessage());
         }
     }
+    public Excursionreservation findById(Integer id) {
+        System.out.println("id="+id);
+        Excursionreservation r = null;
+        String req = "SELECT * FROM `excursionreservation` WHERE `id` = " + id ;
+        try {
+            stm = con.createStatement();
+            ResultSet rst = stm.executeQuery(req);
+            System.out.println(rst.toString());
+            if (rst.next()) {
+                r = new Excursionreservation();
+                r.setId(rst.getInt("id"));
+                r.setPrix(rst.getString("prix"));
+                r.setExcursion_id(rst.getInt("excursion_id"));
+                r.setUser_id(rst.getInt("user_id"));
+                r.setCreated_at(rst.getString("created_at"));
+                r.setStatus(rst.getString("status"));
+                r.setStart(rst.getString("start"));
+                r.setEnd(rst.getString("end"));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return r;
+    }
 }

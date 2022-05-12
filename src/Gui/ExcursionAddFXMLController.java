@@ -83,7 +83,6 @@ public class ExcursionAddFXMLController implements Initializable {
         } else {
             ExcursioncategorieService cs = new ExcursioncategorieService();
             excursioncat = cs.getCategorie(cat);
-            System.out.println(excursioncat);
             Excursion p2 = new Excursion(excursioncat.getId(), lib, desc, prog, ville, prix, duration, localisation);
             ExcursionService ps = new ExcursionService();
             try {

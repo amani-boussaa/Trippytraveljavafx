@@ -43,18 +43,20 @@ public class ItemReservationExcursionFXMLController implements Initializable {
 
     @FXML
     private void click(MouseEvent event) {
-    myListener.onClickListener(excursion);
+    myListener.onClickReservationListener(excursion,reservation);
     }
 
     private Excursion excursion;
+    private Excursionreservation reservation;
     private MyListener myListener;
 
     public void setData(Excursionreservation reservation, MyListener myListener) {
         ExcursionService es = new ExcursionService();
         this.excursion = es.findById(reservation.getExcursion_id());
+        this.reservation = reservation;
         this.myListener = myListener;
         nameLabel.setText(excursion.getLibelle());
-        priceLable.setText(Main.CURRENCY + excursion.getPrix());
+        priceLable.setText(Main.CURRENCY + reservation.getPrix());
         Image image = new Image(getClass().getResourceAsStream(excursion.getImgSrc()));
         img.setImage(image);
     }

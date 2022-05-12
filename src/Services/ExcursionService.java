@@ -4,6 +4,7 @@ import Entities.Chartexcursion;
 import Entities.Excursion;
 import Entities.Excursioncategorie;
 import Utils.MyDB;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -68,6 +70,7 @@ public class ExcursionService implements IService<Excursion> {
         List<Excursion> list = new ArrayList<>();
         try {
             String req = "select * from excursion";
+            //String req = "SELECT * FROM excursion INNER JOIN excursionimage ON excursion.id=excursionimage.excursion_id GROUP BY excursion.id";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(req);
 
@@ -77,7 +80,9 @@ public class ExcursionService implements IService<Excursion> {
                 p.setLibelle(rs.getString("libelle"));
                 p.setPrix(rs.getString("prix"));
                 p.setImgSrc("/img/kiwi.png");
-                p.setColor("6A7324");
+                p.setColor("2ebdc4");   
+                
+
                 list.add(p);
             }
 
