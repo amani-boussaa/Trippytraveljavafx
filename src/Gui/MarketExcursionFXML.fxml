@@ -133,6 +133,7 @@
                         <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
                            <children>
                               <TextField fx:id="id_selected_excursion" opacity="0.0" />
+                              <TextField fx:id="prix_excursion" opacity="0.0" />
                            </children>
                         </HBox>
                      </children>
