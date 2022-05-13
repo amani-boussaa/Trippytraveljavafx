@@ -120,22 +120,53 @@ public class ExcursionFXMLController implements Initializable {
     public void handleclicks(ActionEvent event) {
         if (event.getSource() == btnExcursion) {
             lblstatus.setText("Excursions");
-        }else if (event.getSource() == btnExcursioncat1) {
+        } else if (event.getSource() == btnExcursioncat1) {
             try {
-            Parent parent;
-            parent = FXMLLoader.load(getClass().getResource("/Gui/ExcursionCategorieFXML.fxml"));
-            Scene scene = new Scene(parent);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("Excursion catégorie");
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }  else if (event.getSource() == bntHotel) {
-            lblstatus.setText("Hotels");
+                Stage stageend = (Stage) btnExcursioncat1.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+                Parent parent;
+                parent = FXMLLoader.load(getClass().getResource("/Gui/ExcursionCategorieFXML.fxml"));
+                Scene scene = new Scene(parent);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Excursion catégorie");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (event.getSource() == bntHotel) {
+
+            try {
+                Stage stageend = (Stage) bntHotel.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+                Parent parent;
+                parent = FXMLLoader.load(getClass().getResource("/Gui/HotelInter.fxml"));
+                Scene scene = new Scene(parent);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Hotel");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (event.getSource() == btnMaison) {
-            lblstatus.setText("Maisons d'hote");
+            // lblstatus.setText("Maisons d'hote");
+            try {
+                Stage stageend = (Stage) btnMaison.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+                Parent parent;
+                parent = FXMLLoader.load(getClass().getResource("/Gui/MaisonsFXML.fxml"));
+                Scene scene = new Scene(parent);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Maison");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (event.getSource() == btnAttraction) {
             lblstatus.setText("Attraction");
         } else if (event.getSource() == btnBlog) {
@@ -325,7 +356,7 @@ public class ExcursionFXMLController implements Initializable {
                 false // URLs?
         );
         PiePlot plot = (PiePlot) chart.getPlot();
-         // random color for chart
+        // random color for chart
         for (Chartexcursion tab : chartList) {
             ExcursioncategorieService cs = new ExcursioncategorieService();
             excursioncat = cs.findById(tab.getExcursioncategorie_id());
@@ -366,19 +397,19 @@ public class ExcursionFXMLController implements Initializable {
         }
     }
 
-     @FXML
+    @FXML
     void deconnexion(MouseEvent event) throws IOException {
-        String email=null;
-        String roles=null;
+        String email = null;
+        String roles = null;
         UserSession.getInstace(email, roles).cleanUserSession();
         System.out.println(UserSession.getInstace(email, roles));
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         stage.setScene(new Scene(root));
-        
+
         UserSession us = new UserSession();
         us.cleanUserSession();
-        
+
     }
 }
