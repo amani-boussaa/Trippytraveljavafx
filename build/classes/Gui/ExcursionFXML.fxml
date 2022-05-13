@@ -109,7 +109,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnDeconnexion" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleclicks" prefHeight="47.0" prefWidth="269.0" styleClass="sidebaritem" stylesheets="@../css/stylel.css" text="Deconnexion" textFill="WHITE">
+            <Button fx:id="btnDeconnexion" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleclicks" onMouseClicked="#deconnexion" prefHeight="47.0" prefWidth="269.0" styleClass="sidebaritem" stylesheets="@../css/stylel.css" text="Deconnexion" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="GEAR" size="15" />
                </graphic>

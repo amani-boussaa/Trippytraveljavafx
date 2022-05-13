@@ -25,6 +25,7 @@ import Entities.Excursionreservation;
 import Services.ExcursionRatingService;
 import Services.ExcursionService;
 import Services.ExcursionreservationService;
+import Utils.MyDB;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
@@ -35,7 +36,10 @@ import java.io.FileOutputStream;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -58,7 +62,7 @@ import org.controlsfx.control.Rating;
  *
  * @author amani
  */
-public class MarketExcursionFXMLController implements Initializable  {
+public class MarketExcursionFXMLController implements Initializable {
 
     @FXML
     private VBox chosenFruitCard;
@@ -86,9 +90,10 @@ public class MarketExcursionFXMLController implements Initializable  {
     private Rating ratingdefault;
     @FXML
     private TextField keywordTextField;
-HostServices hostServices ;
+    HostServices hostServices;
     @FXML
     private TextField prix_excursion;
+
     private List<Excursion> getData() {
         List<Excursion> fruits = new ArrayList<>();
         Excursion fruit;
@@ -118,7 +123,7 @@ HostServices hostServices ;
                 ratingdefault.setRating(excursionrating.getRating());
             }
         }
-       
+
     }
 
     @Override
@@ -199,16 +204,16 @@ HostServices hostServices ;
     @FXML
     private void reserver(ActionEvent event) {
         try {
+            String currentUserEmail = UserSession.getEmail();
+            int clientId = this.getUserId(currentUserEmail);
             ExcursionreservationService rervationService = new ExcursionreservationService();
-            Excursionreservation t = new Excursionreservation(Integer.valueOf(id_selected_excursion.getText()), 1, prix_excursion.getText(), "non payé");
+            Excursionreservation t = new Excursionreservation(Integer.valueOf(id_selected_excursion.getText()), clientId, prix_excursion.getText(), "non payé");
             rervationService.ajouterr(t);
             Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
             alert2.setHeaderText(null);
             alert2.setContentText("Réservé avec succés !");
             alert2.showAndWait();
-            
-          
-           
+
         } catch (SQLException ex) {
             Logger.getLogger(MarketExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -229,6 +234,33 @@ HostServices hostServices ;
         }
     }
 
- 
+    @FXML
+    private void addreclamation(MouseEvent event) {
+        try {
+            Parent parent;
+            parent = FXMLLoader.load(getClass().getResource("/Gui/Reclamation.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Réclamation");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public int getUserId(String email) throws SQLException {
+        Connection connection = MyDB.getInstance().getCon();
+        Statement statement = connection.createStatement();
+        String req = "SELECT id from user where email='" + email + "'";
+        ResultSet res = statement.executeQuery(req);
+        int id = 0;
+
+        while (res.next()) {
+            id = res.getInt("id");
+        }
+
+        return id;
+    }
 
 }

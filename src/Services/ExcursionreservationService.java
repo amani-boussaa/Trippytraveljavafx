@@ -2,6 +2,7 @@ package Services;
 
 import Entities.Excursioncategorie;
 import Entities.Excursionreservation;
+import Gui.UserSession;
 import Utils.MyDB;
 
 import java.sql.*;
@@ -38,7 +39,9 @@ public class ExcursionreservationService implements IService<Excursionreservatio
 
     @Override
     public List<Excursionreservation> afficher() throws SQLException {
-        String req = "Select * from `Excursionreservation` where user_id = 1";
+        String currentUserEmail = UserSession.getEmail();
+        int clientId = this.getUserId(currentUserEmail);
+        String req = "Select * from `Excursionreservation` where user_id = "+clientId;
         stm = con.createStatement();
         ResultSet rst = stm.executeQuery(req);
         System.out.println(rst.toString());
@@ -122,5 +125,18 @@ public class ExcursionreservationService implements IService<Excursionreservatio
             ex.printStackTrace();
         }
         return r;
+    }
+     public int getUserId(String email) throws SQLException {
+        Connection connection = MyDB.getInstance().getCon();
+        Statement statement = connection.createStatement();
+        String req = "SELECT id from user where email='" + email + "'";
+        ResultSet res = statement.executeQuery(req);
+        int id = 0;
+
+        while (res.next()) {
+            id = res.getInt("id");
+        }
+
+        return id;
     }
 }

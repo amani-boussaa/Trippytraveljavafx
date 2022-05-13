@@ -98,7 +98,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnDeconnexion" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleclicks" prefHeight="47.0" prefWidth="269.0" styleClass="sidebaritem" stylesheets="@../css/stylel.css" text="Deconnexion" textFill="WHITE">
+            <Button fx:id="btnDeconnexion" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleclicks" onMouseClicked="#deconnexion" prefHeight="47.0" prefWidth="269.0" styleClass="sidebaritem" stylesheets="@../css/stylel.css" text="Deconnexion" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="GEAR" size="15" />
                </graphic>
@@ -121,13 +121,12 @@
           <RowConstraints maxHeight="336.0" minHeight="10.0" prefHeight="312.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TableView fx:id="excursionTable" prefHeight="322.0" prefWidth="556.0" stylesheets="@../css/stylel.css" GridPane.rowIndex="2">
+            <TableView prefHeight="322.0" prefWidth="556.0" stylesheets="@../css/stylel.css" GridPane.rowIndex="2">
               <columns>
-                <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
-                <TableColumn fx:id="libCol" prefWidth="75.0" text="Libellé" />
-                  <TableColumn fx:id="prixCol" prefWidth="75.0" text="Prix" />
-                  <TableColumn fx:id="editCol" prefWidth="75.0" style="-fx-alignment: center;" />
-
+                <TableColumn prefWidth="75.0" text="ID" />
+                <TableColumn prefWidth="75.0" text="Libellé" />
+                  <TableColumn prefWidth="75.0" text="Catégorie" />
+                  <TableColumn prefWidth="75.0" text="Prix" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -149,23 +148,18 @@
                      </HBox.margin>
                   </FontAwesomeIconView>
                   <TextField prefHeight="25.0" prefWidth="249.0" />
-                  <ComboBox prefHeight="27.0" prefWidth="181.0" style="-fx-background-color: white; -fx-border-color: #146886;">
+                  <ComboBox prefWidth="150.0" style="-fx-background-color: white; -fx-border-color: #146886;">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </ComboBox>
-                  <Button graphicTextGap="15.0" mnemonicParsing="false" onMouseClicked="#getAddview" prefHeight="25.0" prefWidth="33.0" stylesheets="@../css/stylel.css">
+                  <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" stylesheets="@../css/stylel.css" text="Ajouter excursion">
                      <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="15" text="" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="15" />
                      </graphic>
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
-                  </Button>
-                  <Button graphicTextGap="15.0" mnemonicParsing="false" onMouseClicked="#refreshTable" prefHeight="25.0" prefWidth="33.0" stylesheets="@../css/stylel.css">
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" size="15" text="" />
-                     </graphic>
                   </Button>
                </children>
             </HBox>

@@ -137,7 +137,12 @@
                            </font>
                         </Label>
                         <Pane prefHeight="65.0" prefWidth="393.0" HBox.hgrow="ALWAYS" />
-                        <Label onMouseClicked="#mesreservation" prefHeight="62.0" prefWidth="132.0" text="Mes réservation" textFill="#878787">
+                        <Label onMouseClicked="#mesreservation" prefHeight="62.0" prefWidth="173.0" text="Mes réservation" textFill="#878787">
+                           <font>
+                              <Font name="Cambria" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label onMouseClicked="#addreclamation" prefHeight="62.0" prefWidth="132.0" text="Réclamation" textFill="#878787">
                            <font>
                               <Font name="Cambria" size="18.0" />
                            </font>

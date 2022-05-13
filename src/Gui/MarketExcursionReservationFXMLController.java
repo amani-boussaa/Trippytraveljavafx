@@ -180,5 +180,20 @@ public class MarketExcursionReservationFXMLController implements Initializable {
         stage.setTitle("Paiement stripe excursion");
         stage.show();
     }
+
+    @FXML
+    private void addreclamation(MouseEvent event) {
+         try {
+            Parent parent;
+            parent = FXMLLoader.load(getClass().getResource("/Gui/Reclamation.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Réclamation");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }
