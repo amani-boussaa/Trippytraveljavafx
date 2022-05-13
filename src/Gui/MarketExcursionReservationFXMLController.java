@@ -25,6 +25,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -195,5 +196,20 @@ public class MarketExcursionReservationFXMLController implements Initializable {
             Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    @FXML
+    void deconnexion(MouseEvent event) throws IOException {
+        String email=null;
+        String roles=null;
+        UserSession.getInstace(email, roles).cleanUserSession();
+        System.out.println(UserSession.getInstace(email, roles));
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        
+        UserSession us = new UserSession();
+        us.cleanUserSession();
+        
+    }
 }

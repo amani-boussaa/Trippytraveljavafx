@@ -154,14 +154,9 @@
                         <Insets left="20.0" right="20.0" />
                      </VBox.margin>
                      <children>
-                        <Label prefHeight="29.0" prefWidth="88.0" text="language" textFill="#878787">
+                        <Label onMouseClicked="#deconnexion" prefHeight="29.0" prefWidth="193.0" text="Déconnexion" textFill="#878787">
                            <font>
                               <Font name="Cambria Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label prefHeight="29.0" prefWidth="77.0" text="Français" textFill="#878787" underline="true">
-                           <font>
-                              <Font name="Cambria" size="18.0" />
                            </font>
                         </Label>
                         <Pane prefHeight="65.0" prefWidth="393.0" HBox.hgrow="ALWAYS" />

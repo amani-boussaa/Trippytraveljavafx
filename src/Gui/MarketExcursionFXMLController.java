@@ -47,6 +47,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.HostServices;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -117,7 +118,11 @@ public class MarketExcursionFXMLController implements Initializable {
         chosenFruitCard.setStyle("-fx-background-color: #" + fruit.getColor() + ";\n"
                 + "    -fx-background-radius: 30;");
         ExcursionRatingService ratingservice = new ExcursionRatingService();
-        excursionrating = ratingservice.findrat(fruit.getId());
+        try {
+            excursionrating = ratingservice.findrat(fruit.getId());
+        } catch (SQLException ex) {
+            Logger.getLogger(MarketExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if (excursionrating != null) {
             if (excursionrating.getRating() != null) {
                 ratingdefault.setRating(excursionrating.getRating());
@@ -261,6 +266,22 @@ public class MarketExcursionFXMLController implements Initializable {
         }
 
         return id;
+    }
+
+    @FXML
+    void deconnexion(MouseEvent event) throws IOException {
+        String email=null;
+        String roles=null;
+        UserSession.getInstace(email, roles).cleanUserSession();
+        System.out.println(UserSession.getInstace(email, roles));
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        
+        UserSession us = new UserSession();
+        us.cleanUserSession();
+        
     }
 
 }
