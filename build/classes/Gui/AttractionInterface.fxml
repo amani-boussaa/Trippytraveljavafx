@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="617.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.AttractionInterfaceController">
+   <children>
+       <VBox prefHeight="583.0" prefWidth="239.0" style="-fx-background-color: #222831;" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="507.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="105.0" prefWidth="266.0" style="-fx-background-color: #fbfbfb;">
+               <children>
+                  <ImageView fitHeight="105.0" fitWidth="266.0" layoutX="72.0" onMouseClicked="#showMarket" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Button fx:id="btnExcursion" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleclicks" prefHeight="47.0" prefWidth="269.0" styleClass="sidebaritem" stylesheets="@../css/stylel.css" text="Excursions" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="MAP" size="15" />
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnExcursioncat1" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleclicks" prefHeight="47.0" prefWidth="269.0" styleClass="sidebaritem" stylesheets="@../css/stylel.css" text="Excursion Catégorie" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="MAP" size="15" />
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="bntHotel" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleclicks" prefHeight="47.0" prefWidth="269.0" styleClass="sidebaritem" stylesheets="@../css/stylel.css" text="Hotels" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" size="15" text="" />
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnMaison" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleclicks" prefHeight="47.0" prefWidth="269.0" styleClass="sidebaritem" stylesheets="@../css/stylel.css" text="Maisons d'hote" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" size="15" text="" />
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnAttraction" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleclicks" prefHeight="47.0" prefWidth="269.0" styleClass="sidebaritem" stylesheets="@../css/stylel.css" text="Attraction" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" size="15" text="" />
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnBlog" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleclicks" prefHeight="47.0" prefWidth="149.0" styleClass="sidebaritem" stylesheets="@../css/stylel.css" text="Blog" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" size="15" text="" />
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnReclamation" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleclicks" prefHeight="47.0" prefWidth="269.0" styleClass="sidebaritem" stylesheets="@../css/stylel.css" text="Réclamation" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" size="15" text="" />
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnDeconnexion" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleclicks" onMouseClicked="#deconnexion" prefHeight="47.0" prefWidth="269.0" styleClass="sidebaritem" stylesheets="@../css/stylel.css" text="Deconnexion" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="GEAR" size="15" />
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <GridPane layoutX="237.0" prefHeight="568.0" prefWidth="485.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="237.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="7.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="238.0" minWidth="10.0" prefWidth="166.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="319.0" minWidth="10.0" prefWidth="319.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="190.0" prefWidth="485.0">
+               <children>
+                  <TextField fx:id="libelleA" layoutX="22.0" layoutY="38.0" prefHeight="25.0" prefWidth="141.0" />
+                  <TextField fx:id="localisationA" layoutX="24.0" layoutY="121.0" prefHeight="25.0" prefWidth="141.0" />
+                  <TextField fx:id="horraireA" layoutX="22.0" layoutY="199.0" prefHeight="25.0" prefWidth="141.0" />
+                  <Button fx:id="ajoutA" layoutX="44.0" layoutY="342.0" mnemonicParsing="false" onAction="#inscrire" onMousePressed="#onsave" prefHeight="25.0" prefWidth="102.0" text="Ajouter" />
+                  <TextField fx:id="prixA" layoutX="24.0" layoutY="283.0" prefHeight="25.0" prefWidth="141.0" />
+                  <Button fx:id="modA" layoutX="44.0" layoutY="386.0" mnemonicParsing="false" onAction="#modifier" onMousePressed="#onsave" prefHeight="25.0" prefWidth="102.0" text="Modifier" />
+                  <Button fx:id="supA" layoutX="44.0" layoutY="427.0" mnemonicParsing="false" onAction="#supprimer" onMousePressed="#onsave" prefHeight="25.0" prefWidth="102.0" text="Supprimer" />
+                  <Label layoutX="26.0" layoutY="14.0" text="Libelle :" />
+                  <Label layoutX="22.0" layoutY="87.0" text="Localisation :" />
+                  <Label layoutX="25.0" layoutY="254.0" text="Prix :" />
+                  <Label layoutX="23.0" layoutY="169.0" text="Horraire" />
+                  <Label fx:id="erreurlib" layoutX="20.0" layoutY="69.0" prefHeight="21.0" prefWidth="184.0" textFill="RED" />
+                  <Label fx:id="erreurlocal" layoutX="20.0" layoutY="152.0" prefHeight="21.0" prefWidth="191.0" textFill="RED" />
+                  <Label fx:id="erreurho" layoutX="20.0" layoutY="236.0" prefHeight="21.0" prefWidth="191.0" textFill="RED" />
+                  <Label fx:id="erreurp" layoutX="20.0" layoutY="314.0" prefHeight="21.0" prefWidth="191.0" textFill="RED" />
+                  <TextField fx:id="rechercherC" layoutX="302.0" layoutY="36.0" onAction="#cherche" prefHeight="31.0" prefWidth="149.0" />
+                  <Label layoutX="187.0" layoutY="38.0" prefHeight="26.0" prefWidth="94.0" text="Rechercher :">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="modifier_H1" layoutX="352.0" layoutY="109.0" mnemonicParsing="false" onAction="#stat" onMousePressed="#onsave" prefHeight="25.0" prefWidth="102.0" text="Statistiques" />
+               </children>
+            </AnchorPane>
+            <TableView fx:id="ListA" prefHeight="112.0" prefWidth="319.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <columns>
+                  <TableColumn id="partic" fx:id="lA" prefWidth="178.0" text="Libelle" />
+                  <TableColumn fx:id="localA" prefWidth="138.0" text="Localisation" />
+                  <TableColumn fx:id="hA" prefWidth="112.0" text="Horraire" />
+                  <TableColumn fx:id="pA" prefWidth="79.0" text="Prix" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

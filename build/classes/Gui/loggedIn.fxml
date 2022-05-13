@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.LoggedInController">
+   <children>
+                  <ImageView fitHeight="105.0" fitWidth="266.0" layoutX="52.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/logo.png" />
+                     </image>
+                  </ImageView>
+    </children>
+    <children>
+      <Label fx:id="label_welcome" layoutX="238.0" layoutY="61.0" text="Welcome !" textAlignment="CENTER">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="label_trippy" layoutX="231.0" layoutY="118.0" text="Trippy Travel" textAlignment="CENTER">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Button fx:id="button_Deconnexion" layoutX="270.0" layoutY="220.0" mnemonicParsing="false" onMouseClicked="#deconnexion" style="-fx-background-color: #0598ff;" text="Logout" />
+      <Button fx:id="button_reclamation" layoutX="258.0" layoutY="166.0" mnemonicParsing="false" onMouseClicked="#reclamation" text="Reclamation" />
+   </children>
+</AnchorPane>

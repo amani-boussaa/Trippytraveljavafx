@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.ReclamationController">
+   <children>
+      <TextField fx:id="tobjet" layoutX="67.0" layoutY="120.0" prefHeight="25.0" prefWidth="200.0" promptText="Objet" />
+      <TextArea fx:id="tdescription" layoutX="67.0" layoutY="183.0" prefHeight="81.0" prefWidth="200.0" promptText="Description" />
+      <Button fx:id="button_ajouter" layoutX="215.0" layoutY="294.0" mnemonicParsing="false" onMouseClicked="#ajouter" text="Ajouter" />
+      <Label layoutX="67.0" layoutY="41.0" text="Reclamation">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="objetControl" layoutX="74.0" layoutY="147.0" textFill="#f80000" />
+      <Label fx:id="descriptionControl" layoutX="79.0" layoutY="269.0" textFill="#f80000" />
+   </children>
+</AnchorPane>
