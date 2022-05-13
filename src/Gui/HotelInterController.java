@@ -92,6 +92,22 @@ public class HotelInterController implements Initializable {
         ObservableList<Hotel> dataList;
     @FXML
     private Button modifier_H1;
+    @FXML
+    private Button btnExcursion;
+    @FXML
+    private Button btnExcursioncat1;
+    @FXML
+    private Button bntHotel;
+    @FXML
+    private Button btnMaison;
+    @FXML
+    private Button btnAttraction;
+    @FXML
+    private Button btnBlog;
+    @FXML
+    private Button btnReclamation;
+    @FXML
+    private Button btnDeconnexion;
 
 
     /**
@@ -352,6 +368,18 @@ public class HotelInterController implements Initializable {
         logger.log(Level.SEVERE, "Failed to create new Window.", e);
     }
 
+    }
+
+    @FXML
+    private void showMarket(MouseEvent event) {
+    }
+
+    @FXML
+    private void handleclicks(ActionEvent event) {
+    }
+
+    @FXML
+    private void deconnexion(MouseEvent event) {
     }
 
     

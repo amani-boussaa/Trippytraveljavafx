@@ -48,11 +48,7 @@ public class MaisonsFXMLController implements Initializable {
      @FXML
     private Button btnExcursion;
     @FXML
-    private Button btnHotel;
-    @FXML
     private Button btnMaison;
-      @FXML
-    private Button btnTypeMaison;
     @FXML
     private Button btnAttraction;
     @FXML
@@ -85,9 +81,6 @@ public class MaisonsFXMLController implements Initializable {
     private TableColumn<Maisonshotes, String> LocalisationCol;
        @FXML
     private TableColumn<Maisonshotes, String> proprietaireCol;
-       @FXML
-    private TextField id_selected_maison;
-       @FXML
     private Rating ratingdefault;
     
     @FXML
@@ -98,6 +91,12 @@ public class MaisonsFXMLController implements Initializable {
     Maisonshotes maisonshotes = null;
 
     ObservableList<Maisonshotes> MaisonsList = FXCollections.observableArrayList();
+    @FXML
+    private Button btnExcursioncat1;
+    @FXML
+    private Button bntHotel;
+    @FXML
+    private Button btnSMS1;
 
     
     @Override
@@ -105,23 +104,100 @@ public class MaisonsFXMLController implements Initializable {
    showAll();
     }
     @FXML
-    public void handleclicks(ActionEvent event) {
-          if (event.getSource() == btnSMS) {
-            lblstatus.setText("SMS");
-        } 
+      public void handleclicks(ActionEvent event) {
         if (event.getSource() == btnExcursion) {
             lblstatus.setText("Excursions");
-        } else if (event.getSource() == btnHotel) {
-            lblstatus.setText("Hotels");
+             try {
+                Stage stageend = (Stage) btnExcursion.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+                Parent parent;
+                parent = FXMLLoader.load(getClass().getResource("/Gui/ExcursionFXML.fxml"));
+                Scene scene = new Scene(parent);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Excursion");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (event.getSource() == btnExcursioncat1) {
+            try {
+                Stage stageend = (Stage) btnExcursioncat1.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+                Parent parent;
+                parent = FXMLLoader.load(getClass().getResource("/Gui/ExcursionCategorieFXML.fxml"));
+                Scene scene = new Scene(parent);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Excursion catégorie");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (event.getSource() == bntHotel) {
+
+            try {
+                Stage stageend = (Stage) bntHotel.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+                Parent parent;
+                parent = FXMLLoader.load(getClass().getResource("/Gui/HotelInter.fxml"));
+                Scene scene = new Scene(parent);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Hotel");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (event.getSource() == btnMaison) {
-            lblstatus.setText("Maisons d'hote");
-        }else if (event.getSource() == btnTypeMaison) {
-            lblstatus.setText("type Maison");
-            
+            // lblstatus.setText("Maisons d'hote");
+            try {
+                Stage stageend = (Stage) btnMaison.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+                Parent parent;
+                parent = FXMLLoader.load(getClass().getResource("/Gui/MaisonsFXML.fxml"));
+                Scene scene = new Scene(parent);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Maison");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (event.getSource() == btnAttraction) {
-            lblstatus.setText("Attraction");
+            try {
+                Stage stageend = (Stage) btnAttraction.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+                Parent parent;
+                parent = FXMLLoader.load(getClass().getResource("/Gui/AttractionInterface.fxml"));
+                Scene scene = new Scene(parent);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Attraction");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (event.getSource() == btnBlog) {
-            lblstatus.setText("Blog");
+            try {
+                Stage stageend = (Stage) btnAttraction.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+                Parent parent;
+                parent = FXMLLoader.load(getClass().getResource("/Gui/ArticleFXML.fxml"));
+                Scene scene = new Scene(parent);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Article");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (event.getSource() == btnReclamation) {
             lblstatus.setText("Réclamations");
         } else if (event.getSource() == btnDeconnexion) {
@@ -297,7 +373,6 @@ public class MaisonsFXMLController implements Initializable {
         //Apply filtered 
     MaisonTable.setItems(MaisonsList);
     }
-     @FXML
     private void showMarket(ActionEvent event) {
         Parent root = null;
         try {
@@ -330,5 +405,19 @@ public class MaisonsFXMLController implements Initializable {
     }
 
    
-  
+   @FXML
+    void deconnexion(MouseEvent event) throws IOException {
+        String email = null;
+        String roles = null;
+        UserSession.getInstace(email, roles).cleanUserSession();
+        System.out.println(UserSession.getInstace(email, roles));
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.setScene(new Scene(root));
+
+        UserSession us = new UserSession();
+        us.cleanUserSession();
+
+    }
 }

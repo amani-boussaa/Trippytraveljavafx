@@ -168,9 +168,35 @@ public class ExcursionFXMLController implements Initializable {
                 Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (event.getSource() == btnAttraction) {
-            lblstatus.setText("Attraction");
+            try {
+                Stage stageend = (Stage) btnAttraction.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+                Parent parent;
+                parent = FXMLLoader.load(getClass().getResource("/Gui/AttractionInterface.fxml"));
+                Scene scene = new Scene(parent);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Attraction");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (event.getSource() == btnBlog) {
-            lblstatus.setText("Blog");
+            try {
+                Stage stageend = (Stage) btnAttraction.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+                Parent parent;
+                parent = FXMLLoader.load(getClass().getResource("/Gui/ArticleFXML.fxml"));
+                Scene scene = new Scene(parent);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Article");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (event.getSource() == btnReclamation) {
             lblstatus.setText("Réclamations");
         } else if (event.getSource() == btnDeconnexion) {

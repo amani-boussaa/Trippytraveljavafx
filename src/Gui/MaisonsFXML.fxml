@@ -35,6 +35,17 @@
                   <Font size="14.0" />
                </font>
             </Button>
+            <Button fx:id="btnExcursioncat1" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleclicks" prefHeight="47.0" prefWidth="269.0" styleClass="sidebaritem" stylesheets="@../css/stylel.css" text="Excursion Catégorie" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="MAP" size="15" />
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
             <Button fx:id="bntHotel" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleclicks" prefHeight="47.0" prefWidth="269.0" styleClass="sidebaritem" stylesheets="@../css/stylel.css" text="Hotels" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" size="15" text="" />
@@ -91,6 +102,17 @@
                </font>
             </Button>
             <Button fx:id="btnReclamation" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleclicks" prefHeight="47.0" prefWidth="269.0" styleClass="sidebaritem" stylesheets="@../css/stylel.css" text="Réclamation" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" size="15" text="" />
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnDeconnexion" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleclicks" onMouseClicked="#deconnexion" prefHeight="47.0" prefWidth="269.0" styleClass="sidebaritem" stylesheets="@../css/stylel.css" text="Déconnexion" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" size="15" text="" />
                </graphic>
