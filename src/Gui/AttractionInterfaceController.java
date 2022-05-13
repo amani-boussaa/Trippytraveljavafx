@@ -23,6 +23,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -87,6 +88,22 @@ public class AttractionInterfaceController implements Initializable {
     ObservableList<Attraction> list;
     @FXML
     private Button modifier_H1;
+    @FXML
+    private Button btnExcursion;
+    @FXML
+    private Button btnExcursioncat1;
+    @FXML
+    private Button bntHotel;
+    @FXML
+    private Button btnMaison;
+    @FXML
+    private Button btnAttraction;
+    @FXML
+    private Button btnBlog;
+    @FXML
+    private Button btnReclamation;
+    @FXML
+    private Button btnDeconnexion;
     /**
      * Initializes the controller class.
      */
@@ -250,6 +267,126 @@ public class AttractionInterfaceController implements Initializable {
 
     }
 
+    @FXML
+    private void showMarket(MouseEvent event) {
+    }
+
+    @FXML
+     public void handleclicks(ActionEvent event) {
+        if (event.getSource() == btnExcursion) {
+           try {
+                Stage stageend = (Stage) btnExcursion.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+                Parent parent;
+                parent = FXMLLoader.load(getClass().getResource("/Gui/ExcursionFXML.fxml"));
+                Scene scene = new Scene(parent);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Excursion");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (event.getSource() == btnExcursioncat1) {
+            try {
+                Stage stageend = (Stage) btnExcursioncat1.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+                Parent parent;
+                parent = FXMLLoader.load(getClass().getResource("/Gui/ExcursionCategorieFXML.fxml"));
+                Scene scene = new Scene(parent);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Excursion catégorie");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (event.getSource() == bntHotel) {
+
+            try {
+                Stage stageend = (Stage) bntHotel.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+                Parent parent;
+                parent = FXMLLoader.load(getClass().getResource("/Gui/HotelInter.fxml"));
+                Scene scene = new Scene(parent);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Hotel");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (event.getSource() == btnMaison) {
+            // lblstatus.setText("Maisons d'hote");
+            try {
+                Stage stageend = (Stage) btnMaison.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+                Parent parent;
+                parent = FXMLLoader.load(getClass().getResource("/Gui/MaisonsFXML.fxml"));
+                Scene scene = new Scene(parent);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Maison");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (event.getSource() == btnAttraction) {
+            try {
+                Stage stageend = (Stage) btnAttraction.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+                Parent parent;
+                parent = FXMLLoader.load(getClass().getResource("/Gui/AttractionInterface.fxml"));
+                Scene scene = new Scene(parent);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Attraction");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (event.getSource() == btnBlog) {
+            try {
+                Stage stageend = (Stage) btnAttraction.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+                Parent parent;
+                parent = FXMLLoader.load(getClass().getResource("/Gui/ArticleFXML.fxml"));
+                Scene scene = new Scene(parent);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Article");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (event.getSource() == btnReclamation) {
+            lblstatus.setText("Réclamations");
+        } else if (event.getSource() == btnDeconnexion) {
+            lblstatus.setText("Déconnexion");
+        }
+    }
+
+    @FXML
+    void deconnexion(MouseEvent event) throws IOException {
+        String email = null;
+        String roles = null;
+        UserSession.getInstace(email, roles).cleanUserSession();
+        System.out.println(UserSession.getInstace(email, roles));
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.setScene(new Scene(root));
+
+        UserSession us = new UserSession();
+        us.cleanUserSession();
+
+    }
 
 
     

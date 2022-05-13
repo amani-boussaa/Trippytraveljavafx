@@ -200,7 +200,7 @@ public class ArticleFXMLController implements Initializable {
             }
         } else if (event.getSource() == btnBlog) {
             try {
-                Stage stageend = (Stage) btnAttraction.getScene().getWindow();
+                Stage stageend = (Stage) btnBlog.getScene().getWindow();
                 // do what you have to do
                 stageend.close();
                 Parent parent;
@@ -209,6 +209,21 @@ public class ArticleFXMLController implements Initializable {
                 Stage stage = new Stage();
                 stage.setScene(scene);
                 stage.setTitle("Article");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (event.getSource() == btnArticlecat) {
+            try {
+                Stage stageend = (Stage) btnArticlecat.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+                Parent parent;
+                parent = FXMLLoader.load(getClass().getResource("/Gui/ArticleCategoryFXML.fxml"));
+                Scene scene = new Scene(parent);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Article catégories");
                 stage.show();
             } catch (IOException ex) {
                 Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
