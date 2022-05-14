@@ -306,9 +306,39 @@ public class ExcursionCategorieFXMLController implements Initializable {
             return cell;
         };
         editCol.setCellFactory(cellFoctory);
-        //excursioncTable.setItems(ExcursionList);
+        excursioncatTable.setItems(ExcursioncatList);
         //recherche
-        FilteredList<Excursioncategorie> filteredData = new FilteredList<>(ExcursioncatList, b -> true);
+         //recherche
+        try {
+            
+
+            excursioncatTable.setItems(ExcursioncatList);
+            FilteredList<Excursioncategorie> filtredData = new FilteredList<>(ExcursioncatList, b -> true);
+            keywordTextField.textProperty().addListener((observable, olValue, newValue) -> {
+                filtredData.setPredicate(Excursioncategorie -> {
+                    if (newValue == null || newValue.isEmpty()) {
+
+                        return true;
+                    }
+                    String lowerCaseFilter = newValue.toLowerCase();
+                    if (Excursioncategorie.getLibelle().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                        return true;
+                    } else if (String.valueOf(Excursioncategorie.getId()).indexOf(lowerCaseFilter) != -1) {
+                        return true;
+                    }  else {
+                        return false;
+                    }
+                });
+            });
+            SortedList<Excursioncategorie> sortedData = new SortedList<>(filtredData);
+            sortedData.comparatorProperty().bind(excursioncatTable.comparatorProperty());
+            excursioncatTable.setItems(sortedData);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+
+        }
+        /*FilteredList<Excursioncategorie> filteredData = new FilteredList<>(ExcursioncatList, b -> true);
         keywordTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(Excursioncategorie -> {
                 if (newValue.isEmpty() || newValue == null) {
@@ -327,7 +357,7 @@ public class ExcursionCategorieFXMLController implements Initializable {
         sortedData.comparatorProperty().bind(excursioncatTable.comparatorProperty());
         //Apply filtered and sorted data to the table view
         excursioncatTable.setItems(sortedData);
-
+*/
     }
 
     @FXML

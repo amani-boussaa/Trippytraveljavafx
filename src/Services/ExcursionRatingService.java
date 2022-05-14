@@ -62,10 +62,14 @@ public class ExcursionRatingService {
     }
 
     public Excursionrating findrat(Integer excursion_id) throws SQLException {
-String currentUserEmail = UserSession.getEmail();
+        Connection connection = MyDB.getInstance().getCon();
+        String currentUserEmail = UserSession.getEmail();
         int clientId = this.getUserId(currentUserEmail);
+        
+        System.out.println("clientId" + clientId);
         Excursionrating cat = null;
-        String req = "SELECT * FROM `excursionrating` WHERE `excursion_id` = " + excursion_id + " AND `user_id` ="+clientId;
+        String req = "SELECT * FROM `excursionrating` WHERE `excursion_id` = " + excursion_id + " AND `user_id` =" + clientId;
+        System.out.println(req);
         try {
             stm = con.createStatement();
             ResultSet rst = stm.executeQuery(req);
@@ -88,6 +92,7 @@ String currentUserEmail = UserSession.getEmail();
         Connection connection = MyDB.getInstance().getCon();
         Statement statement = connection.createStatement();
         String req = "SELECT id from user where email='" + email + "'";
+        System.out.println(req);
         ResultSet res = statement.executeQuery(req);
         int id = 0;
 

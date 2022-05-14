@@ -32,6 +32,8 @@ public class ItemReservationExcursionFXMLController implements Initializable {
     private Label priceLable;
     @FXML
     private ImageView img;
+    @FXML
+    private Label statusLable1;
 
     /**
      * Initializes the controller class.
@@ -57,6 +59,7 @@ public class ItemReservationExcursionFXMLController implements Initializable {
         this.myListener = myListener;
         nameLabel.setText(excursion.getLibelle());
         priceLable.setText(Main.CURRENCY + reservation.getPrix());
+        statusLable1.setText(reservation.getStatus());
         Image image = new Image(getClass().getResourceAsStream(excursion.getImgSrc()));
         img.setImage(image);
     }
