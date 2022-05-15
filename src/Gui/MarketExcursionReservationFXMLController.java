@@ -68,6 +68,10 @@ public class MarketExcursionReservationFXMLController implements Initializable {
     private Image image;
     @FXML
     private TextField id_selected_reservation;
+    @FXML
+    private Label excursionMENU;
+    @FXML
+    private Label mes_reservationLBL;
     
     private List<Excursionreservation> getData() {
         List<Excursionreservation> fruits = new ArrayList<>();
@@ -88,7 +92,7 @@ public class MarketExcursionReservationFXMLController implements Initializable {
         fruitPriceLabel.setText(Main.CURRENCY + excursionreservation.getPrix());
         image = new Image(getClass().getResourceAsStream(fruit.getImgSrc()));
         fruitImg.setImage(image);
-        chosenFruitCard.setStyle("-fx-background-color: #" + fruit.getColor() + ";\n"
+        chosenFruitCard.setStyle("-fx-background-color: #222831" + ";\n"
                 + "    -fx-background-radius: 30;");
        
        
@@ -161,6 +165,22 @@ public class MarketExcursionReservationFXMLController implements Initializable {
 
     @FXML
     private void mesreservation(MouseEvent event) {
+        try {
+            if (event.getSource() == mes_reservationLBL) {
+            Stage stageend = (Stage) mes_reservationLBL.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+            }
+            Parent parent;
+            parent = FXMLLoader.load(getClass().getResource("/Gui/MarketExcursionReservationFXML.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Mes réservation excursion");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -211,5 +231,25 @@ public class MarketExcursionReservationFXMLController implements Initializable {
         UserSession us = new UserSession();
         us.cleanUserSession();
         
+    }
+
+    @FXML
+    private void excursionlistemenu(MouseEvent event) {
+        try {
+            if (event.getSource() == excursionMENU) {
+            Stage stageend = (Stage) excursionMENU.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+            }
+            Parent parent;
+            parent = FXMLLoader.load(getClass().getResource("/Gui/MarketExcursionFXML.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Excursions");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

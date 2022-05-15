@@ -89,11 +89,13 @@ public class MarketExcursionFXMLController implements Initializable {
     private TextField id_selected_excursion;
     @FXML
     private Rating ratingdefault;
-    @FXML
-    private TextField keywordTextField;
     HostServices hostServices;
     @FXML
     private TextField prix_excursion;
+    @FXML
+    private Label mes_reservationLBL;
+    @FXML
+    private Label excursionMENU;
 
     private List<Excursion> getData() {
         List<Excursion> fruits = new ArrayList<>();
@@ -116,7 +118,7 @@ public class MarketExcursionFXMLController implements Initializable {
         fruitPriceLabel.setText(Main.CURRENCY + fruit.getPrix());
         image = new Image(getClass().getResourceAsStream(fruit.getImgSrc()));
         fruitImg.setImage(image);
-        chosenFruitCard.setStyle("-fx-background-color: #" + fruit.getColor() + ";\n"
+        chosenFruitCard.setStyle("-fx-background-color: #" + "222831" + ";\n"
                 + "    -fx-background-radius: 30;");
         ExcursionRatingService ratingservice = new ExcursionRatingService();
         try {
@@ -218,7 +220,7 @@ public class MarketExcursionFXMLController implements Initializable {
             String currentUserEmail = UserSession.getEmail();
             int clientId = this.getUserId(currentUserEmail);
             ExcursionreservationService rervationService = new ExcursionreservationService();
-            Excursionreservation t = new Excursionreservation(Integer.valueOf(id_selected_excursion.getText()), clientId, prix_excursion.getText(), "non payé");
+            Excursionreservation t = new Excursionreservation(Integer.valueOf(id_selected_excursion.getText()), clientId, prix_excursion.getText(), "reservation.non_paye");
             rervationService.ajouterr(t);
             Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
             alert2.setHeaderText(null);
@@ -233,6 +235,11 @@ public class MarketExcursionFXMLController implements Initializable {
     @FXML
     private void mesreservation(MouseEvent event) {
         try {
+            if (event.getSource() == mes_reservationLBL) {
+            Stage stageend = (Stage) mes_reservationLBL.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+            }
             Parent parent;
             parent = FXMLLoader.load(getClass().getResource("/Gui/MarketExcursionReservationFXML.fxml"));
             Scene scene = new Scene(parent);
@@ -288,6 +295,26 @@ public class MarketExcursionFXMLController implements Initializable {
         UserSession us = new UserSession();
         us.cleanUserSession();
         
+    }
+
+    @FXML
+    private void excursionlistemenu(MouseEvent event) {
+        try {
+            if (event.getSource() == excursionMENU) {
+            Stage stageend = (Stage) excursionMENU.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+            }
+            Parent parent;
+            parent = FXMLLoader.load(getClass().getResource("/Gui/MarketExcursionFXML.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Excursions");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

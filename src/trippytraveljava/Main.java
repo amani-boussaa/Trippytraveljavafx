@@ -30,7 +30,7 @@ public class Main extends Application{
 
     Stage stage;
     Parent parent;
-    public static final String CURRENCY = "$";
+    public static final String CURRENCY = "DT";
     @Override
     public void start(Stage primaryStage) {
         this.stage= primaryStage;

@@ -72,7 +72,10 @@ public class Excursionreservation {
     }
 
     public String getStatus() {
-        return status;
+         if(status.equals("succeeded")){
+             status = "payé";
+        }
+        return status;       
     }
 
     public void setStatus(String status) {
