@@ -48,23 +48,22 @@ public class SignUpController implements Initializable {
 
     @FXML
     private PasswordField tpassword;
-    
+
     @FXML
     private Label firstnameControl;
-    
+
     @FXML
-    private Label lastnameControl;  
-    
+    private Label lastnameControl;
+
     @FXML
     private Label emailControl;
-    
+
     @FXML
     private Label passwordControl;
-    
+
     //String recepient = temail.getText();
-    
     @FXML
-    void signup(MouseEvent event) throws IOException, Exception{
+    void signup(MouseEvent event) throws IOException, Exception {
         Connection connection = MyDB.getInstance().getCon();
         try {
             Date date1 = new Date();
@@ -75,28 +74,35 @@ public class SignUpController implements Initializable {
             String email = temail.getText();
             String password = tpassword.getText();
             String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
-            
-            if (firstname.length()<3){
-                 firstnameControl.setText("3 caractères au minmum");
-            }else firstnameControl.setText("");
-            
-            if (lastname.length()<3){
-                 lastnameControl.setText("3 caractères au minmum");
-            }else lastnameControl.setText("");
-            
-            if(!(email.matches("(.*)@(.*)"))){
+
+            if (firstname.length() < 3) {
+                firstnameControl.setText("3 caractères au minmum");
+            } else {
+                firstnameControl.setText("");
+            }
+
+            if (lastname.length() < 3) {
+                lastnameControl.setText("3 caractères au minmum");
+            } else {
+                lastnameControl.setText("");
+            }
+
+            if (!(email.matches("(.*)@(.*)"))) {
                 emailControl.setText("email non valide");
-            }else emailControl.setText("");
-            
-            if (password.length()<6){
+            } else {
+                emailControl.setText("");
+            }
+
+            if (password.length() < 6) {
                 passwordControl.setText("6 caractères au minmum");
-            }else passwordControl.setText("");
-            
-            if(firstname.length()>2 && lastname.length()>2 && email.matches("(.*)@(.*)") && password.length()>5  ){
+            } else {
+                passwordControl.setText("");
+            }
+
+            if (firstname.length() > 2 && lastname.length() > 2 && email.matches("(.*)@(.*)") && password.length() > 5) {
                 Statement statement = connection.createStatement();
                 int status = statement.executeUpdate("INSERT INTO `user`(`email`, `roles`, `password`, `is_verified`, `firstname`, `lastname`, `image`, `updated_at`, `bio`, `telephone`, `address`, `naissance`, `sexe`)"
-                    + "VALUES ('"+email+"','"+"ROLE_USER"+"','"+hashed+"','"+0+"','"+firstname+"','"+lastname+"','"+null+"','"+account_Date+"','"+null+"','"+null+"','"+null+"','"+account_Date+"','"+null+"' )");
-
+                        + "VALUES ('" + email + "','" + "[\"ROLE_USER\"]" + "','" + hashed + "','" + 0 + "','" + firstname + "','" + lastname + "','" + null + "','" + account_Date + "','" + null + "','" + null + "','" + null + "','" + account_Date + "','" + null + "' )");
                 if (status > 0) {
                     System.out.println("user registered");
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -109,7 +115,6 @@ public class SignUpController implements Initializable {
                     stage.setScene(new Scene(root));
                 }
             }
-            
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -123,7 +128,7 @@ public class SignUpController implements Initializable {
         Stage stage = (Stage) node.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
