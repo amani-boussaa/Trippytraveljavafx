@@ -109,6 +109,7 @@ public class MarketExcursionFXMLController implements Initializable {
     }
 
     private void setChosenFruit(Excursion fruit) {
+        
         id_selected_excursion.setText(String.valueOf(fruit.getId()));
         prix_excursion.setText(String.valueOf(fruit.getPrix()));
         fruitNameLable.setText(fruit.getLibelle());
@@ -123,10 +124,15 @@ public class MarketExcursionFXMLController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(MarketExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println("excursionrating.getRating()");       
+        //System.out.println(excursionrating.getRating());
+
         if (excursionrating != null) {
             if (excursionrating.getRating() != null) {
                 ratingdefault.setRating(excursionrating.getRating());
             }
+        }else{
+            ratingdefault.setRating(0);
         }
 
     }

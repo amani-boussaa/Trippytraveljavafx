@@ -318,42 +318,79 @@ public class ExcursionFXMLController implements Initializable {
             return cell;
         };
         editCol.setCellFactory(cellFoctory);
-        //excursionTable.setItems(ExcursionList);
+        excursionTable.setItems(ExcursionList);
         //recherche
-        FilteredList<Excursion> filteredData = new FilteredList<>(ExcursionList, b -> true);
-        keywordTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(Excursion -> {
-                if (newValue.isEmpty() || newValue == null) {
-                    return true;
-                }
-                String searchKeyword = newValue.toLowerCase();
-                if (Excursion.getLibelle().toLowerCase().indexOf(searchKeyword) > -1) {
-                    return true;//means we found a match in libelle exursion
-                }
-                if (Excursion.getDescription().toLowerCase().indexOf(searchKeyword) > -1) {
-                    return true;//means we found a match in libelle exursion
-                }
-                if (Excursion.getPrix().toLowerCase().indexOf(searchKeyword) > -1) {
-                    return true;//means we found a match in libelle exursion
-                }
-                if (Excursion.getProgramme().toLowerCase().indexOf(searchKeyword) > -1) {
-                    return true;//means we found a match in libelle exursion
-                }
-                if (Excursion.getLocalisation().toLowerCase().indexOf(searchKeyword) > -1) {
-                    return true;//means we found a match in libelle exursion
-                }
-                if (Excursion.getDuration().toLowerCase().indexOf(searchKeyword) > -1) {
-                    return true;//means we found a match in libelle exursion
-                }
-                return false;//no match found
-            });
-        });
-        SortedList<Excursion> sortedData = new SortedList<>(filteredData);
-        //bind sorted result with Table view
-        sortedData.comparatorProperty().bind(excursionTable.comparatorProperty());
-        //Apply filtered and sorted data to the table view
-        excursionTable.setItems(sortedData);
+        try {
+            ExcursionService serv = new ExcursionService();
+            ExcursionList = serv.getExcursionList();
 
+            excursionTable.setItems(ExcursionList);
+            FilteredList<Excursion> filtredData = new FilteredList<>(ExcursionList, b -> true);
+            keywordTextField.textProperty().addListener((observable, olValue, newValue) -> {
+                filtredData.setPredicate(Excursion -> {
+                    if (newValue == null || newValue.isEmpty()) {
+
+                        return true;
+                    }
+                    String lowerCaseFilter = newValue.toLowerCase();
+                    if (Excursion.getLibelle().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                        return true;
+                    } else if (String.valueOf(Excursion.getId()).indexOf(lowerCaseFilter) != -1) {
+                        return true;
+                    } else if (String.valueOf(Excursion.getPrix()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+            });
+            SortedList<Excursion> sortedData = new SortedList<>(filtredData);
+            sortedData.comparatorProperty().bind(excursionTable.comparatorProperty());
+            excursionTable.setItems(sortedData);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+
+        }
+        /*try {
+            FilteredList<Excursion> filteredData = new FilteredList<>(ExcursionList, b -> true);
+            keywordTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+                filteredData.setPredicate(Excursion -> {
+                    if (newValue.isEmpty() || newValue == null) {
+                        return true;
+                    }
+                    String searchKeyword = newValue.toLowerCase();
+                    if (Excursion.getLibelle().toLowerCase().indexOf(searchKeyword) > -1) {
+                        return true;//means we found a match in libelle exursion
+                    }
+                    if (Excursion.getDescription().toLowerCase().indexOf(searchKeyword) > -1) {
+                        return true;//means we found a match in libelle exursion
+                    }
+                    if (Excursion.getPrix().toLowerCase().indexOf(searchKeyword) > -1) {
+                        return true;//means we found a match in libelle exursion
+                    }
+                    if (Excursion.getProgramme().toLowerCase().indexOf(searchKeyword) > -1) {
+                        return true;//means we found a match in libelle exursion
+                    }
+                    if (Excursion.getLocalisation().toLowerCase().indexOf(searchKeyword) > -1) {
+                        return true;//means we found a match in libelle exursion
+                    }
+                    if (Excursion.getDuration().toLowerCase().indexOf(searchKeyword) > -1) {
+                        return true;//means we found a match in libelle exursion
+                    }
+                    return false;//no match found
+                });
+            });
+            SortedList<Excursion> sortedData = new SortedList<>(filteredData);
+            //bind sorted result with Table view
+            sortedData.comparatorProperty().bind(excursionTable.comparatorProperty());
+            //Apply filtered and sorted data to the table view
+            excursionTable.setItems(sortedData);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+
+        }
+         */
     }
 
     @FXML
@@ -438,4 +475,6 @@ public class ExcursionFXMLController implements Initializable {
         us.cleanUserSession();
 
     }
+
+    
 }

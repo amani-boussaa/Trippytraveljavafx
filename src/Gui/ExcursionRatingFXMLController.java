@@ -67,7 +67,7 @@ public class ExcursionRatingFXMLController implements Initializable {
             MarketExcursionFXMLController marketExcursionController = loader.getController();
             marketExcursionController.setTextField(excursionRating.getRating());
             //close this window and open another to refresh rating
-            Stage stage1 = (Stage) excursionRating.getScene().getWindow();
+            /*Stage stage1 = (Stage) excursionRating.getScene().getWindow();
             // do what you have to do
             stage1.close();
             //open another stage
@@ -77,6 +77,21 @@ public class ExcursionRatingFXMLController implements Initializable {
             stage.setScene(scene);
             stage.setTitle("Rating excursion");
             stage.show();
+*/
+            try {
+                Stage stageend = (Stage) excursionRating.getScene().getWindow();
+                // do what you have to do
+                stageend.close();
+                Parent parent;
+                parent = FXMLLoader.load(getClass().getResource("/Gui/MarketExcursionFXML.fxml"));
+                Scene scene = new Scene(parent);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Excursion market");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcursionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Succés");
 

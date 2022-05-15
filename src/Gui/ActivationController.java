@@ -46,7 +46,7 @@ public class ActivationController implements Initializable {
         if (testCode == code){
             Connection connection = MyDB.getInstance().getCon();
             Statement statement = connection.createStatement();
-            int status = statement.executeUpdate("UPDATE user SET roles='"+"ROLE_CLIENT"+"' WHERE email='"+email+"' ");
+            int status = statement.executeUpdate("UPDATE user SET roles='"+"[\"ROLE_CLIENT\"]"+"', is_verified='"+1+"' WHERE email='"+email+"' ");
             if(status > 0){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setHeaderText(null);
