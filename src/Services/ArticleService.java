@@ -101,7 +101,7 @@ Date date = Calendar.getInstance().getTime();
             ResultSet rst = stm.executeQuery(req);
             System.out.println(rst.toString());
             while (rst.next()) {
-                Article p = new Article(rst.getInt("id"), rst.getInt("id_category_id"), rst.getString("title"), rst.getString("content"));
+                Article p = new Article(rst.getInt("id"),rst.getInt("views"), rst.getInt("id_category_id"), rst.getString("title"), rst.getString("content"));
                 System.out.println(p.toString());
                 Excursions.add(p);
 

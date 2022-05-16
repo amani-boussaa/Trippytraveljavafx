@@ -7,7 +7,7 @@ package Entities;
           
 public class Article {
 
-    private int id, excursioncategorie_id;
+    private int id,views, excursioncategorie_id;
     private String libelle, description;
     
     public java.sql.Date created_at=new java.sql.Date(System.currentTimeMillis());
@@ -15,6 +15,10 @@ public class Article {
     private String color;
 
     public Article() {
+    }
+
+    public int getViews() {
+        return views;
     }
 
     public Article(int id, String libelle, int excursioncategorie_id) {
@@ -41,6 +45,15 @@ public class Article {
         this.excursioncategorie_id = idcat;
         this.libelle = lib;
         this.description = desc;
+    }
+
+    public Article(int id,int views, int excursioncategorie_id, String libelle, String description) {
+        this.id = id;
+        this.views = views;
+        this.excursioncategorie_id = excursioncategorie_id;
+        this.libelle = libelle;
+        this.description = description;
+        
     }
    
 

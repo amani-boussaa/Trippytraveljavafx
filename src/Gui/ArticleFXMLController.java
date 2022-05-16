@@ -272,7 +272,7 @@ public class ArticleFXMLController implements Initializable {
     public void showAll() {
         ArticleService ps = new ArticleService();
         ObservableList<Article> ExcursionList = ps.getExcursionList();
-        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        idCol.setCellValueFactory(new PropertyValueFactory<>("views"));
         libCol.setCellValueFactory(new PropertyValueFactory<>("libelle"));
         prixCol.setCellValueFactory(new PropertyValueFactory<>("description"));
         //excursionTable.setItems(ExcursionList);
